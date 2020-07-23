@@ -1,0 +1,18 @@
+
+apply from: "../component_build.gradle"
+
+android {
+    resourcePrefix "login_" //给 Module 内的资源名增加前缀, 避免资源名冲突
+    defaultConfig {
+        //如果是独立模块，则使用当前组件的包名
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.suntront.module_login"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //引入kotlinmvvm
+    implementation project(':lib-kotlinmvvm')
+}

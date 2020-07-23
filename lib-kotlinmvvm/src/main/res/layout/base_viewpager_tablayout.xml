@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:orientation="vertical">
+
+    <com.mtjsoft.www.kotlinmvputils.view.NonSwipeableViewPager
+        android:id="@+id/vp_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/viewline" />
+
+    <!--
+    app:tabGravity="center" 对齐方式，可选fill和center
+    app:tabIndicatorColor="@color/colorAccent" 设置tab下划线的颜色
+    app:tabMode="scrollable" scrollable是可以横行滚动,fixed是指固定个数
+    app:tabSelectedTextColor="@color/colorPrimaryDark" 选择tab的文本颜色
+    app:tabTextColor="@color/colorPrimary" 普通tab字体颜色
+    -->
+    <View
+        android:id="@+id/viewline"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/tl_tab"
+        android:background="@color/background"></View>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_tab"
+        style="@style/StyleMyCustomTagLayout"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:clipChildren="false"
+        app:tabBackground="@color/transparent"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/main_base_color"
+        app:tabTextColor="@color/gray_text" />
+
+</RelativeLayout>

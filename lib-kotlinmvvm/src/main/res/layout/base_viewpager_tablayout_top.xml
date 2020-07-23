@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--
+    app:tabGravity="center" 对齐方式，可选fill和center
+    app:tabIndicatorColor="@color/colorAccent" 设置tab下划线的颜色
+    app:tabMode="scrollable" scrollable是可以横行滚动,fixed是指固定个数
+    app:tabSelectedTextColor="@color/colorPrimaryDark" 选择tab的文本颜色
+    app:tabTextColor="@color/colorPrimary" 普通tab字体颜色
+    -->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_tab"
+        style="@style/StyleMyCustomTagLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_base_color"
+        android:minHeight="35dp"
+        app:tabBackground="@color/transparent"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/main_base_color"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/gray_hint_text" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tl_tab" />
+
+
+</RelativeLayout>

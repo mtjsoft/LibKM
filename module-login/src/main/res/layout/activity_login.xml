@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_top"
+        android:layout_width="match_parent"
+        android:layout_height="261dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/img_login_top"/>
+
+    <cn.mtjsoft.www.shapeview.ShapeRelativeLayout
+        android:id="@+id/rl_name"
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:layout_below="@+id/iv_top"
+        android:paddingLeft="13dp"
+        android:paddingTop="4dp"
+        android:paddingRight="13dp"
+        android:paddingBottom="4dp"
+        app:radius="100dp"
+        app:solidColor="#F6F9FE"
+        app:strokeColor="#5780CF"
+        app:strokeWidth="1dp">
+
+        <com.mtjsoft.www.kotlinmvputils.view.MyTextView
+            android:id="@+id/login_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/login_name_edittext"
+            android:padding="4dp"
+            android:text="@string/login_name_icon"
+            android:textColor="@color/login_mytextview_textcolor"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/login_name_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/login_name_textview"
+            android:background="@color/transparent"
+            android:hint="请输入账号"
+            android:imeOptions="actionNext"
+            android:nextFocusForward="@+id/login_password_edittext"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:singleLine="true"
+            android:textColorHint="#999999" />
+
+    </cn.mtjsoft.www.shapeview.ShapeRelativeLayout>
+
+    <cn.mtjsoft.www.shapeview.ShapeRelativeLayout
+        android:id="@+id/rl_psw"
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="13dp"
+        android:paddingTop="4dp"
+        android:paddingRight="13dp"
+        android:paddingBottom="4dp"
+        app:radius="100dp"
+        app:solidColor="#F6F9FE"
+        app:strokeColor="#5780CF"
+        app:strokeWidth="1dp">
+
+        <com.mtjsoft.www.kotlinmvputils.view.MyTextView
+            android:id="@+id/login_password_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/login_password_edittext"
+            android:padding="4dp"
+            android:text="@string/login_password_icon"
+            android:textColor="@color/login_mytextview_textcolor"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/login_password_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/login_password_textview"
+            android:background="@color/transparent"
+            android:hint="请输入密码"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:singleLine="true"
+            android:textColorHint="#999999" />
+
+    </cn.mtjsoft.www.shapeview.ShapeRelativeLayout>
+
+
+    <TextView
+        android:id="@+id/login_submit_button"
+        android:layout_width="276dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/rl_psw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:background="@mipmap/img_login_btubg"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/login_submit_text"
+        android:textColor="@color/login_submit_text"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_submit_button"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:gravity="center"
+        android:text="—— 热线工单系统 ——"
+        android:textColor="#999999"
+        android:textSize="14sp" />
+
+</RelativeLayout>

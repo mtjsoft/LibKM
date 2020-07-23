@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/hh_shape_custom_dialog_bg"
+    android:gravity="center"
+    android:padding="30dp"
+    android:orientation="vertical">
+
+    <com.mtjsoft.www.kotlinmvputils.view.SpinnerLoader
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:point_color="@color/white" />
+
+    <TextView
+        android:id="@+id/loading_msg"
+        android:layout_marginTop="10dp"
+        style="@style/text_white_14_w_w"
+        android:text="@string/hh_loading"/>
+</LinearLayout>

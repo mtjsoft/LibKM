@@ -1,0 +1,294 @@
+<resources>
+    <string name="app_name">KotlinMvvp</string>
+    <string name="net_error">网络请求失败，请稍后重试···</string>
+    <string name="eixt_soft">再次点击将退出应用</string>
+    <string name="tip">提示</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
+    <string name="commit">提交</string>
+    <string name="error_log">很抱歉,程序出现异常,即将重启.</string>
+    <string name="commit_su">提交成功</string>
+
+    <string name="hh_loading">正在加载···</string>
+    <string name="hh_no_data">暂无数据</string>
+    <string name="hh_no_data_more">无更多数据</string>
+    <string name="hh_load_failed">加载失败，请稍后重试</string>
+    <string name="hh_load_failed_click">加载失败，点击重试</string>
+    <string name="hh_select_photo_info">确定(%1$d/%2$d)</string>
+    <string name="hh_select_photo">选择图片</string>
+    <string name="hh_picture">图片</string>
+    <string name="hh_picture_count">%1$s张</string>
+    <string name="hh_select_photo_max">最多选取%1$s张图片</string>
+
+    <!-- 验证码开始 -->
+    <string name="get_code_latter">%1$ds后重新获取</string>
+    <string name="user_send_code">发送验证码</string>
+    <string name="get_code">获取验证码</string>
+    <string name="get_code_fa">获取验证码失败</string>
+    <string name="get_code_su">获取验证码成功</string>
+    <!-- 验证码结束 -->
+    <!-- 权限dialog提示框开始 -->
+    <string name="permission">请您点击确认申请权限,否则应用不能正常使用!</string>
+    <string name="permission_must">必要的权限被拒绝,请手动开启!否则应用将无法正常使用！</string>
+
+    <!--  公共  -->
+    <!--字体图标-->
+    <string name="toolbar_back_icon">&#xe625;</string>
+    <!--选择条件-->
+    <string name="choose_must">必选</string>
+    <string name="choose_need">选填</string>
+    <string name="fill_must">必填</string>
+    <!--登录界面-->
+    <string name="login_name_icon"> &#xe601;</string>
+    <string name="login_password_icon">&#xe602;</string>
+    <string name="login_submit_text">登录</string>
+    <!--主界面-->
+    <string name="main_loudspeaker_icon">&#xe61b;</string>
+    <string name="main_notice_right_icon">&#xe613;</string>
+    <string name="main_midmenu_datasyn_icon">&#xe6a8;</string>
+    <string name="main_midmenu_notice_icon">&#xe624;</string>
+    <string name="main_midmenu_flashlight_icon">&#xe60e;</string>
+    <string name="main_midmenu_userinfo_icon">&#xe607;</string>
+    <string name="main_midmenu_datasyn">数据同步</string>
+    <string name="main_midmenu_notice">通知公告</string>
+    <string name="main_midmenu_flashlight">移动手电</string>
+    <string name="main_midmenu_userinfo">我的详情</string>
+    <string name="main_bottommenu_metertask">抄表任务</string>
+    <string name="main_bottommenu_stopwater">用户停水</string>
+    <string name="main_bottommenu_thoughwater">用户通水</string>
+    <string name="main_bottommenu_tablewells">表井管理</string>
+    <string name="main_bottommenu_querystatis">查询统计</string>
+    <string name="main_bottommenu_noticewater">水费通知</string>
+
+
+    <!--数据同步-->
+    <string name="datasyn_download_metertask_icon">&#xe62a;</string>
+    <string name="datasyn_upload_task_icon">&#xe62b;</string>
+    <string name="datasyn_upload_welltask_icon">&#xe60d;</string>
+    <string name="datasyn_del_icon">&#xe61f;</string>
+    <string name="datasyn_right_arrow_icon">&#xe613;</string>
+    <string name="datasyn_download_metertask_top">下载抄表任务</string>
+    <string name="datasyn_download_metertask_bottom">单击下载本月抄表信息</string>
+    <string name="datasyn_upload_metertask_top">上传最新抄表数据</string>
+    <string name="datasyn_upload_metertask_bottom">单击上传最新抄表数据</string>
+    <string name="datasyn_upload_welltask_top">上传最新表井数据</string>
+    <string name="datasyn_upload_welltask_bottom">单击上传最新表井数据</string>
+    <string name="datasyn_upload_usertask_top">上传最新用户用水属性数据</string>
+    <string name="datasyn_upload_usertask_bottom">单击上传最新用户用水属性数据</string>
+    <string name="datasyn_del">删除上月抄表数据</string>
+    <string name="datasyn_del_bottom">在下载本月抄表信息前，要先清除上月抄表数据</string>
+
+    <!--抄表任务-->
+    <string name="metertask_button_text">继续抄表</string>
+    <!--下载抄表-->
+    <string name="taskdown_load_state">未下载</string>
+    <!--抄表详情-->
+    <string name="meterdetail_title">抄表详情</string>
+    <string name="meterdetail_searchhint">请输入户号</string>
+    <string name="meterdetail_query">查询</string>
+    <string name="meterdetail_yichao">已抄</string>
+    <string name="meterdetail_weichao">未抄</string>
+    <string name="meterdetail_guchao">估抄</string>
+    <string name="meterdetail_huhao">用户编号：</string>
+    <string name="meterdetail_huming">用户名称：</string>
+    <string name="meterdetail_yuefen">抄表月份：</string>
+    <string name="meterdetail_shangzhi">上月止度：</string>
+    <string name="meterdetail_yongliang">本月水量：</string>
+    <string name="meterdetail_junzhi">月平均值：</string>
+    <string name="meterdetail_biaowei">水表位置：</string>
+    <string name="meterdetail_benzhi">本月止度：</string>
+    <string name="meterdetail_zhuiliang">追加水量：</string>
+    <string name="meterdetail_yuanyin">估抄原因：</string>
+    <string name="meterdetail_noyuanyin">未抄原因：</string>
+    <string name="meterdetail_xiangqing">用户详情</string>
+    <string name="meterdetail_kz">开账</string>
+    <string name="meterdetail_paizhao">拍照</string>
+    <string name="meterdetail_baocun">保存</string>
+    <string name="meterdetail_dayin">打印</string>
+    <string name="meterdetail_seephoto">查看照片</string>
+    <string name="meterdetail_arrowlog">&#xe613;</string>
+    <string name="meterdetail_arrowlogx">&#xe72f;</string>
+    <string name="meterdetail_yonghulog">&#xe607;</string>
+    <string name="meterdetail_zhaoxlog">&#xe627;</string>
+    <string name="meterdetail_baoclog">&#xe60d;</string>
+    <string name="meterdetail_daylog">&#xe628;</string>
+    <string name="meterdetail_seephotolog">&#xe62e;</string>
+    <string name="mdetail_hus">（户数：</string>
+    <string name="mdetail_yic">）（已抄：</string>
+    <string name="mdetail_yicend">）</string>
+    <string name="meterdetail_zuobz">坐标值：</string>
+    <!--用户详情-->
+    <string name="udetail_tv_yonghxx">用户信息</string>
+    <string name="udetail_logyonghxx">&#xe630;</string>
+    <string name="udetail_hum">户名</string>
+    <string name="udetail_yonghbh">用户编号</string>
+    <string name="udetail_yonghlx">用水性质</string>
+    <string name="udetail_logyonghlx">&#xe61e;</string>
+    <string name="udetail_hunhysxq">混合用水详情</string>
+    <string name="udetail_hunhysxz">混合用水性质</string>
+    <string name="udetail_hunhyslx">混合用水类型</string>
+    <string name="udetail_dingbl">定比例：</string>
+    <string name="udetail_dingl">定量：</string>
+    <string name="udetail_beiz">备注：</string>
+    <string name="tijiao">保存</string>
+    <!--上传抄表数据-->
+    <string name="update_uncopy">未抄：</string>
+    <string name="update_unload_well">未上传表井：</string>
+    <string name="update_unload_meter">待传数据量：</string>
+    <string name="updatem_btntext">立即上传</string>
+    <string name="updatem_hus">户数：</string>
+    <!--表井管理-->
+    <string name="well_manager_exist">已有表井</string>
+    <string name="well_manager_all">全选</string>
+    <string name="well_manager_delete">删除</string>
+    <string name="well_manager_add">添加新的表井</string>
+    <string name="well_manager_add_icon">&#xe649;</string>
+    <string name="well_manager_user">用户管理</string>
+    <!--添加表井-->
+    <string name="add_well_name">表井名称</string>
+    <string name="add_well_address">小区名称</string>
+    <string name="add_well_btn">添加</string>
+    <string name="add_well_hint">必填</string>
+    <!--用户管理-->
+    <string name="user_manager_wellname">表井名称</string>
+    <string name="user_manager_nameandcode">户名或户号</string>
+    <string name="user_manager_edittext_wellname">必选</string>
+    <string name="user_manager_edittext_nameandcode">选填</string>
+    <string name="user_manager_btn_text">查询</string>
+    <string name="user_manager_title_name">户名</string>
+    <string name="user_manager_title_code">户号</string>
+    <string name="user_manager_title_well">表井名</string>
+    <string name="user_manager_title_all">全选</string>
+    <string name="user_manager_add_icon">&#xe641;</string>
+    <string name="user_manager_del_icon">&#xe631;</string>
+    <string name="user_manager_add">关联用户</string>
+    <string name="user_manager_del">解除关联</string>
+    <!--我的详情-->
+    <string name="admin_detail_name_icon">&#xe630;</string>
+    <string name="admin_detail_code_icon">&#xe62c;</string>
+    <string name="admin_detail_state_icon">&#xe72e;</string>
+    <string name="admin_detail_name">姓名</string>
+    <string name="admin_detail_code">账号</string>
+    <string name="admin_detail_state">状态</string>
+    <string name="admin_detail_login">已登录</string>
+    <string name="version">版本</string>
+    <string name="admin_detail_quit">退出当前账号</string>
+    <!--查询统计-->
+    <string name="statistics_meter_icon">&#xe606;</string>
+    <string name="statistics_meter">抄表日志</string>
+    <string name="statistics_unmeter_icon">&#xe617;</string>
+    <string name="statistics_unmeter">未抄统计</string>
+    <string name="statistics_guessmeter_icon">&#xe61c;</string>
+    <string name="statistics_guessmeter">估抄统计</string>
+    <string name="statistics_detailmeter_icon">&#xe620;</string>
+    <string name="statistics_detailmeter">用水明细统计</string>
+    <string name="statistics_chargehistory_icon">&#xe61a;</string>
+    <string name="statistics_chargehistory">收费记录查询</string>
+    <string name="statistics_arrearshistory_icon">&#xe619;</string>
+    <string name="statistics_arrearshistory">应收记录查询</string>
+    <string name="statistics_right_arrow_icon">&#xe613;</string>
+    <string name="statistics_cbhistory">抄表记录查询</string>
+    <string name="statistics_cb_icon">&#xe612;</string>
+    <!--查询结果-->
+    <string name="query_result_list_usercode">户号</string>
+    <string name="query_result_list_username">户名</string>
+    <!--抄表日志-->
+    <string name="meter_log_choosemeter">选择抄表册</string>
+    <string name="meter_log_starttime">开始时间</string>
+    <string name="meter_log_endtime">结束时间</string>
+    <string name="meter_log_query">查询</string>
+    <string name="meter_log_hint_meter">必选</string>
+    <string name="meter_log_hint_starttime">必填</string>
+    <string name="meter_log_hint_endtime">必填</string>
+    <string name="meter_log_right_arrow_icon">&#xe613;</string>
+    <!--估抄统计-->
+    <string name="guess_meter_choosemeter">选择抄表册</string>
+    <string name="guess_meter_hint_meter">必选</string>
+    <string name="guess_meter_query">查询</string>
+    <string name="guess_meter_right_arrow_icon">&#xe613;</string>
+    <!--未抄统计-->
+    <string name="un_meter_choosemeter">选择抄表册</string>
+    <string name="un_meter_hint_meter">必选</string>
+    <string name="un_meter_query">查询</string>
+    <string name="un_meter_right_arrow_icon">&#xe613;</string>
+    <!--用水明细查询-->
+    <string name="water_detail_start">起度：</string>
+    <string name="water_detail_end">止度：</string>
+    <string name="water_detail_company">水量(吨)</string>
+    <string name="water_detail_right_arrow_icon">&#xe613;</string>
+    <string name="water_detail_starttime">开始时间</string>
+    <string name="water_detail_endtime">结束时间</string>
+    <string name="water_detail_userinfo">请输入姓名或户号</string>
+    <string name="water_detail_query">查询</string>
+    <string name="water_detail_choosemeter">选择抄表册</string>
+    <!--欠费查询-->
+    <string name="arrears_start">起度：</string>
+    <string name="arrears_end">止度：</string>
+    <string name="arrears_company">金额(元)</string>
+    <string name="arrears_right_arrow_icon">&#xe613;</string>
+    <string name="arrears_userinfo">请输入姓名或户号</string>
+    <string name="arrears_query">查询</string>
+    <string name="arrears_choosemeter">选择抄表册</string>
+    <!--收费记录查询-->
+    <string name="charge_date">缴费日期</string>
+    <string name="charge_real">实收金额</string>
+    <string name="charge_right_arrow_icon">&#xe613;</string>
+    <string name="charge_userinfo">请输入姓名或户号</string>
+    <string name="charge_query">查询</string>
+    <string name="charge_starttime">开始时间</string>
+    <string name="charge_endtime">结束时间</string>
+    <string name="charge_choosemeter">选择抄表册</string>
+    <!--用户通水-->
+    <string name="through_water_userinfo">姓名或户号</string>
+    <string name="through_water_query">查询</string>
+    <string name="through_water_choosemeter">选择抄表册</string>
+    <string name="through_water_right_arrow_icon">&#xe613;</string>
+    <string name="through_water_text1">已于</string>
+    <string name="through_water_text2">缴清水费</string>
+    <string name="through_water_btn">通水</string>
+    <!--用户停水-->
+    <string name="stop_water_userinfo">姓名或户号</string>
+    <string name="stop_water_query">查询</string>
+    <string name="stop_water_choosemeter">选择抄表册</string>
+    <string name="stop_water_count">欠款笔数</string>
+    <string name="stop_water_money">欠款总额</string>
+    <string name="stop_water_right_arrow_icon">&#xe613;</string>
+    <!--水费通知单-->
+    <string name="water_charge_userinfo">姓名或户号</string>
+    <string name="water_charge_query">查询</string>
+    <string name="water_charge_choosemeter">选择抄表册</string>
+    <string name="water_charge_usercode">户号</string>
+    <string name="water_charge_username">户名</string>
+    <string name="water_charge_roster">册本</string>
+    <string name="water_charge_arrears">欠费(元)</string>
+    <string name="water_charge_print">打印</string>
+    <string name="water_charge_print_icon">&#xe628;</string>
+    <string name="water_charge_right_arrow_icon">&#xe613;</string>
+    <!--Xlistview-->
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="xlistview_header_hint_success">刷新成功</string>
+    <string name="xlistview_header_hint_failt">刷新失败</string>
+    <string name="not_updated_yet">暂未更新过</string>
+    <string name="updated_at">上次更新于%1$s前</string>
+    <string name="updated_just_now">刚刚更新</string>
+    <string name="time_error">时间有问题</string>
+    <!--通知公告-->
+    <string name="company_dianpng">&#xe633;</string>
+    <!--蓝牙打印-->
+    <string name="bluetooth_unbind_device">未绑定设备</string>
+    <string name="bluetooth_bind_device">已绑定设备</string>
+    <string name="bluetooth_discovery_device">搜索设备</string>
+    <!--照片展示-->
+    <string name="sphoto_title">查看图片</string>
+    <!--上传用户详情修改后的信息-->
+    <string name="upudetail_">查看图片</string>
+    <string name="meterdetail_address">用户地址：</string>
+    <string name="meterdetail_phone">联系方式：</string>
+    <string name="meterdetail_mark">抄表备注：</string>
+    <string name="meterdetail_num">水表铅封：</string>
+</resources>

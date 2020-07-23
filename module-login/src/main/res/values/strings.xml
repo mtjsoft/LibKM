@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_order_income_tip">待签收工单\n一键签收</string>
+    <string name="login_order_no_tip">待办工单\n方便快捷 省时省力</string>
+    <string name="login_order_over_tip">已完工单\n拒接排队</string>
+</resources>

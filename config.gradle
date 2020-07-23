@@ -1,0 +1,131 @@
+ext {
+    android = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.2",
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 100,
+            versionName      : "1.0.0"
+    ]
+    version = [
+            kotlin_version: "1.3.71",
+            rxlifecycle   : "2.2.2",
+            room_version  : "2.2.5",
+            glide_version : "4.10.0",
+    ]
+
+    dependencies = [
+            "gradle"                       : "com.android.tools.build:gradle:3.5.3",
+            "kotlin_gradle_plugin"         : "org.jetbrains.kotlin:kotlin-gradle-plugin:${version["kotlin_version"]}",
+
+            //kotlin
+            "kotlin_stdlib_jdk7"           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version["kotlin_version"]}",
+            "kotlin_stdlib"                : "org.jetbrains.kotlin:kotlin-stdlib:${version["kotlin_version"]}",
+            //引入Kotlin - anko 功能库
+            "anko_commons"                 : "org.jetbrains.anko:anko-commons:0.10.8",
+
+            //网络请求框架
+            //以下两个为必须，其它均为非必须
+            "rxhttp"                       : "com.ljx.rxhttp:rxhttp:2.2.2",
+            "rxhttp_compiler"              : "com.ljx.rxhttp:rxhttp-compiler:2.2.2",
+            "okhttp3"                      : "com.squareup.okhttp3:okhttp:4.6.0",
+            "rxlife_coroutine"             : "com.ljx.rxlife:rxlife-coroutine:2.0.0", //管理协程生命周期，页面销毁，关闭请求
+            // rxlifecycle
+            "rxlifecycle"                  : "com.trello.rxlifecycle2:rxlifecycle:${version["rxlifecycle"]}",
+            "rxlifecycle_components"       : "com.trello.rxlifecycle2:rxlifecycle-components:${version["rxlifecycle"]}",
+            //rxandroid & rxjava2
+            "rxandroid"                    : "io.reactivex.rxjava2:rxandroid:2.1.1",
+            "rxjava"                       : "io.reactivex.rxjava2:rxjava:2.2.8",
+            "adapter_rxjava"               : "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+            //retrofit2
+            "retrofit"                     : "com.squareup.retrofit2:retrofit:2.5.0",
+            "converter_gson"               : "com.squareup.retrofit2:converter-gson:2.4.0",
+            "logging_interceptor"          : "com.squareup.okhttp3:logging-interceptor:3.8.0",
+
+            // DB数据库
+            "room_runtime"                 : "androidx.room:room-runtime:${version["room_version"]}",
+            "room_compiler"                : "androidx.room:room-compiler:${version["room_version"]}",
+            // optional - RxJava support for Room
+            "room_rxjava2"                 : "androidx.room:room-rxjava2:${version["room_version"]}",
+
+            // 公共资源
+            // mmkv
+            "mmkv_static"                  : "com.tencent:mmkv-static:1.1.1",
+            // 自带背景圆角控件
+            "ShapeView"                    : "com.github.mtjsoft:ShapeView:v1.1.0",
+            // flexbox弹性布局
+            "flexbox"                      : "com.google.android:flexbox:2.0.1",
+            // 沉浸式状态栏和沉浸式导航栏管理
+            "immersionbar"                 : "com.gyf.immersionbar:immersionbar:3.0.0",
+            "immersionbar_components"      : "com.gyf.immersionbar:immersionbar-components:3.0.0",// fragment快速实现（可选）
+            "immersionbar_ktx"             : "com.gyf.immersionbar:immersionbar-ktx:3.0.0",// kotlin扩展（可选）
+            "statusbarutil"                : "com.jaeger.statusbarutil:library:1.5.1",
+            // 图表库
+            "MPAndroidChart"               : "com.github.PhilJay:MPAndroidChart:v3.1.0",
+            // 圆形进度条
+            "circleprogressbar"            : "com.dinuscxj:circleprogressbar:1.3.0",
+            // PopupWindow弹窗库
+            "BasePopup"                    : "com.github.razerdp:BasePopup:2.2.3",
+            // 原形图片
+            "circleimageview"              : "de.hdodenhof:circleimageview:3.1.0",
+            // 圆角图片
+            "roundedimageview"             : "com.makeramen:roundedimageview:2.3.0",
+            // banner轮播图组件
+            "banner"                       : "com.youth.banner:banner:2.0.8",
+            // 时间选择器、省市区三级联动
+            "PickerView"                   : "com.contrarywind:Android-PickerView:4.1.9",
+            //图片选择框架
+            "ImageSelector"                : "com.yuyh.imgsel:library:2.0.6",
+
+            // MVVM
+            "multidex"                     : "androidx.multidex:multidex:2.0.0",
+            "lifecycle_extensions"         : "androidx.lifecycle:lifecycle-extensions:2.2.0",
+            "recyclerview"                 : "androidx.recyclerview:recyclerview:1.1.0",
+            "cardview"                     : "androidx.cardview:cardview:1.0.0",
+            "appcompat"                    : "androidx.appcompat:appcompat:1.1.0",
+            "support_v4"                   : "androidx.legacy:legacy-support-v4:1.0.0",
+            "material"                     : "com.google.android.material:material:1.1.0",
+            // 测试
+            "junit"                        : "junit:junit:4.12",
+            "ext_junit"                    : "androidx.test.ext:junit:1.1.1",
+            "espresso_core"                : "androidx.test.espresso:espresso-core:3.2.0",
+
+            "core_ktx"                     : "androidx.core:core-ktx:1.2.0",
+            "constraintlayout"             : "androidx.constraintlayout:constraintlayout:1.1.3",
+
+            "gson"                         : "com.google.code.gson:gson:2.8.5",
+            //引入eventbus事件分发
+            "eventbus"                     : "org.greenrobot:eventbus:3.2.0",
+            //引入加载动画
+            "avi"                          : "com.wang.avi:library:2.1.3",
+            //今日头条屏幕适配方案终极版
+            "autosize"                     : "me.jessyan:autosize:1.2.1",
+            //图片加载glide
+            "glide"                        : "com.github.bumptech.glide:glide:${version["glide_version"]}",
+            "glide_compiler"               : "com.github.bumptech.glide:compiler:${version["glide_version"]}",
+            "glide_okhttp3"                : "com.github.bumptech.glide:okhttp3-integration:${version["glide_version"]}",
+            // 查看大图
+            "BigImageViewPager"            : "com.github.SherlockGougou:BigImageViewPager:androidx-6.0.1",
+            //下拉刷新、上拉加载
+            "SmartRefreshLayout"           : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0",
+            //没有使用特殊Header，可以不加这行
+            "SmartRefreshHeader"           : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0",
+            // 引入BaseRecyclerViewAdapterHelper
+            "BaseRecyclerViewAdapterHelper": "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4",
+
+            //arcgis-android
+            "arcgisruntime"                : "com.esri.arcgisruntime:arcgis-android:100.8.0",
+
+            //组件化路由
+            "arouter"                      : "com.alibaba:arouter-api:1.5.0",
+            "arouter-compiler"             : "com.alibaba:arouter-compiler:1.2.2",
+
+            // 蓝牙
+            "blelibrary"                   : "cn.com.superLei:blelibrary:3.1.0",
+
+            "GridPager"                    : "com.github.mtjsoft:GridPager:v3.1.0",
+
+            "UploadMultiImageView"         : "com.gitee.mtj_java:UploadMultiImageView:1.0.0"
+    ]
+
+}

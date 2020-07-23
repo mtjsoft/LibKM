@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AndSelectCircleView">
+        <!-- 设置子控件显示的宽度 -->
+        <attr name="child_width" format="dimension" />
+        <!-- 设置子控件显示的高度 -->
+        <attr name="child_height" format="dimension"></attr>
+        <!-- 设置子控件之间的间距 -->
+        <attr name="child_margin" format="dimension"></attr>
+        <!-- 子空间是否显示为圆形，默认为true，此时控件的大小为宽和高中的最小值 -->
+        <attr name="is_circle" format="boolean"></attr>
+        <!-- 正常情况下显示的颜色 -->
+        <attr name="normal_color" format="color|reference"></attr>
+        <!-- 选中的时候显示的颜色 -->
+        <attr name="select_color" format="color|reference"></attr>
+        <!-- 子空间是否显示为自定义的drawable，默认为false，此时控件的大小为自定义的大小 -->
+        <attr name="is_custom" format="boolean"></attr>
+        <attr name="custom_drawable" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="SpinnerLoader">
+        <attr name="point_color" format="color" />
+        <attr name="isdynamic" format="boolean" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主题色4B4453 -->
+    <color name="main_base_color">#0aabfe</color>
+    <color name="base_color">#0aabfe</color>
+    <!-- 白色 -->
+    <color name="white">#FFFFFF</color>
+    <!-- 纯黑色 -->
+    <color name="black">#000000</color>
+    <!-- 黑色 -->
+    <color name="black_text">#333333</color>
+    <!-- 浅黑色 -->
+    <color name="black_little_text">#646464</color>
+    <!-- 灰色 -->
+    <color name="text_no_checked">#A6AAAD</color>
+    <color name="gray_text">#9F9F9F</color>
+    <color name="gray">#CDCDCD</color>
+    <!-- 浅灰 -->
+    <color name="gray_hint_text">#D3D3D3</color>
+    <!-- 背景颜色 -->
+    <color name="background">#F5F5F5</color>
+    <color name="line_color">#80cccccc</color>
+    <!-- 黑色，相对亮一点 -->
+    <color name="black_light">#151A15</color>
+    <color name="hh_select_photo_bottom">#EE3A3E3C</color>
+    <color name="hh_select_photo_arrow">#929392</color>
+    <color name="hh_select_photo_type_window_bg">#cc000000</color>
+    <color name="black_dim">#3E403E</color>
+    <!-- 半透明 黑 -->
+    <color name="half_transparent">#32323232</color>
+    <!-- 半透明 黑 -->
+    <color name="half_black">#60000000</color>
+    <!-- 全透明 -->
+    <color name="transparent">#00000000</color>
+    <!-- 弹出框线的颜色 -->
+    <color name="check_code_line">#DBD9D8</color>
+    <!-- 固定颜色结束 -->
+    <!-- 版本更新开始 -->
+    <color name="version_white_gray">#D6D6D6</color>
+    <!-- 白色（有一定透明度） -->
+    <color name="version_white_low">#eeffffff</color>
+    <!-- 版本更新结束 -->
+    <color name="hh_toast_bg">#bb12140E</color>
+    <color name="red">#ff0000</color>
+
+
+    <!--通用设置-->
+    <color name="ibtn_untrans">#21000000</color>
+    <color name="btn_normal">#0aabfe</color>
+    <color name="btn_pressed">#0393de</color>
+    <color name="loading_background">#7f000000</color>
+    <color name="activated_color">#0e5cca</color>
+    <!--默认Toolbar颜色-->
+    <color name="toolbar_background">#0aabfe</color>
+    <color name="toolbar_statusbar">#0889cb</color>
+    <color name="toolbar_back">#ffffff</color>
+    <color name="toolbar_title">#ffffff</color>
+    <color name="toolbar_menu_pressed">#333d3d3d</color>
+    <!--登录界面-->
+    <color name="login_relativeLayout_background">#ffffff</color>
+    <color name="login_mytextview_textcolor">#0aabfe</color>
+    <color name="login_hint_textcolor">#717171</color>
+    <color name="login_edittext_background">@android:color/transparent</color>
+    <color name="login_submit_pressed">#e5ffffff</color>
+    <color name="login_submit_normal">#ffffff</color>
+    <color name="login_submit_text">#ffffff</color>
+    <color name="line_divider">#E5E5E5</color>
+    <!--主界面-->
+    <color name="toolbar_bg">#A6D1FC</color>
+    <color name="main_statusbar">#0e5cca</color>
+    <color name="main_midmenu_icon">#0e5cca</color>
+    <color name="main_midmenu_text">#000000</color>
+    <color name="main_bottommenu_text">#000000</color>
+    <color name="main_bottommenu_background">#ffffff</color>
+    <color name="main_often_function">#f0f0f0</color>
+    <color name="main_menu_pressed">#e9e9e9</color>
+    <color name="main_text_color_large">#000000</color>
+    <!--数据同步-->
+    <color name="datasyn_download_icon">#0aabfe</color>
+    <color name="datasyn_upload_icon">#10db0a</color>
+    <color name="datasyn_top_text">#000000</color>
+    <color name="datasyn_background">#f0f0f0</color>
+    <color name="datasyn_menu_pressed">#e9e9e9</color>
+    <color name="datasyn_menu_background">#ffffff</color>
+    <color name="datasyn_menu_del">#ff526f</color>
+    <!--下载抄表任务-->
+    <color name="taskdown_list_item_text">#000000</color>
+    <color name="taskdown_list_item_state">#ff0000</color>
+    <color name="taskdown_list_item_background">#ffffff</color>
+    <color name="taskdown_background">#f0f0f0</color>
+    <color name="taskdown_list_item_divider">#f0f0f0</color>
+    <color name="taskdown_btn_text">#ffffff</color>
+    <!--抄表任务-->
+    <color name="metertask_background">#f0f0f0</color>
+    <color name="metertask_list_item_divider">#f0f0f0</color>
+    <color name="metertask_progressbar_background">#dfdfdf</color>
+    <color name="metertask_progressbar_finished">#0aabfe</color>
+    <color name="metertask_progressbar_text">#000000</color>
+    <color name="metertask_button_border">#4b9403</color>
+    <color name="metertask_button_background">#5ab501</color>
+    <color name="metertask_button_background_pressed">#4fa20f</color>
+    <color name="metertask_button_text">#ffffff</color>
+    <!--抄表详情-->
+    <color name="mdetail_bg">#f0f0f0</color>
+    <color name="mdetail_bmbg">#ffffff</color>
+    <color name="mdetail_framec">#f0f0f0</color>
+    <color name="mdetail_querytc">#ffffff</color>
+    <color name="mdetail_query_unp">#ff7109</color>
+    <color name="mdetail_query_p">#b93d00</color>
+    <color name="mdetail_finish">#ff9e9e</color>
+    <color name="mdetail_unfinish">#b2b2b2</color>
+    <color name="mdetail_statetc">#ff4040</color>
+    <color name="mdetail_statetc_g">#4fa20f</color>
+    <color name="mdetail_arrowc">#cccccc</color>
+    <color name="mdetail_logc">#0377b3</color>
+    <!--用户详情-->
+    <color name="udetail_bg">#f0f0f0</color>
+    <color name="udetail_itembg">#ffffff</color>
+    <color name="udetail_tclan">#0aaafe</color>
+    <color name="udetail_tcslan">#0889cb</color>
+    <color name="udetail_tcbai">#ffffff</color>
+    <color name="udetail_tchui">#9e9e9e</color>
+    <color name="udetail_tchei">#464646</color>
+    <color name="udetail_tcqhei">#4f4f4f</color>
+    <color name="udetail_humdivier">#bababa</color>
+    <color name="udetail_evbg">#e6e6e6</color>
+    <color name="udetail_logc">#999999</color>
+    <!--上传数据-->
+    <color name="update_btn_text">#ffffff</color>
+    <!--表井管理-->
+    <color name="well_manager_exist_text">#000000</color>
+    <color name="well_manager_del_text">#ffffff</color>
+    <color name="well_manager_add">#0aabfe</color>
+    <color name="well_manager_user">#ffffff</color>
+    <color name="well_manager_background">#f0f0f0</color>
+    <color name="well_manager_list_item_divider">#f0f0f0</color>
+    <color name="well_manager_list_item_background">#ffffff</color>
+    <color name="well_manager_foot_pressed">#e9e9e9</color>
+    <color name="well_manager_foot_normal">#ffffff</color>
+    <!--添加表井-->
+    <color name="add_well_linearlayout_background">#ffffff</color>
+    <color name="add_well_text">#000000</color>
+    <color name="add_well_btn_text">#ffffff</color>
+    <color name="add_well_background">#f0f0f0</color>
+    <color name="add_well_edittext_background">@android:color/transparent</color>
+    <!--用户管理-->
+    <color name="user_manager_text">#000000</color>
+    <color name="user_manager_btntext">#ffffff</color>
+    <color name="user_manager_add_icon">#0aabfe</color>
+    <color name="user_manager_del_icon">#ff3c00</color>
+    <color name="user_manager_background">#f0f0f0</color>
+    <color name="user_manager_bottom_menu">#ffffff</color>
+    <color name="user_manager_list_item_divider">#f0f0f0</color>
+    <color name="user_manager_list_item_background">#ffffff</color>
+    <color name="user_manager_foot_pressed">#e9e9e9</color>
+    <color name="user_manager_foot_normal">#ffffff</color>
+    <!--表册管理-->
+    <color name="meter_background">#f0f0f0</color>
+    <color name="meter_list_item_divider">#f0f0f0</color>
+    <!--我的详情-->
+    <color name="admin_detail_item_background">#ffffff</color>
+    <color name="admin_detail_background">#f0f0f0</color>
+    <color name="admin_detail_text">#000000</color>
+    <color name="admin_detail_name_icon">#0aabfe</color>
+    <color name="admin_detail_code_icon">#ff9837</color>
+    <color name="admin_detail_state_icon">#54b59c</color>
+    <color name="admin_detail_pressed">#e9e9e9</color>
+    <color name="admin_detail_normal">#ffffff</color>
+    <color name="statistics_background">#f0f0f0</color>
+    <color name="statistics_listitem_background">#ffffff</color>
+    <color name="statistics_text">#000000</color>
+    <color name="statistics_meter_icon">#52affb</color>
+    <color name="statistics_unmeter_icon">#ff9837</color>
+    <color name="statistics_guessmeter_icon">#54b59c</color>
+    <color name="statistics_detailmeter_icon">#1dcff5</color>
+    <color name="statistics_chargehistory_icon">#fc5352</color>
+    <color name="statistics_arrearshistory_icon">#feb801</color>
+    <color name="statistics_list_item_divider">#f0f0f0</color>
+    <!--查询结果-->
+    <color name="query_result_list_background">#f0f0f0</color>
+    <color name="query_result_list_item_background">#ffffff</color>
+    <color name="query_result_list_text">#000000</color>
+    <color name="query_result_item_divider">#f0f0f0</color>
+    <!--抄表日志-->
+    <color name="meter_log_background">#f0f0f0</color>
+    <color name="meter_log_list_item_background">#ffffff</color>
+    <color name="meter_log_list_text">#000000</color>
+    <color name="meter_log_list_item_pressed">#e9e9e9</color>
+    <color name="meter_log_list_item_normal">#ffffff</color>
+    <color name="meter_log_linearlayout_background">#ffffff</color>
+    <color name="meter_log_btn_text">#ffffff</color>
+    <!--估抄统计-->
+    <color name="guess_meter_background">#f0f0f0</color>
+    <color name="guess_meter_list_item_background">#ffffff</color>
+    <color name="guess_meter_list_text">#000000</color>
+    <color name="guess_meter_linearlayout_background">#ffffff</color>
+    <color name="guess_meter_btn_text">#ffffff</color>
+    <!--未抄统计-->
+    <color name="un_meter_background">#f0f0f0</color>
+    <color name="un_meter_list_item_background">#ffffff</color>
+    <color name="un_meter_list_text">#000000</color>
+    <color name="un_meter_linearlayout_background">#ffffff</color>
+    <color name="un_meter_btn_text">#ffffff</color>
+    <!--用水明细查询-->
+    <color name="water_detail_text">#000000</color>
+    <color name="water_detail_background">#f0f0f0</color>
+    <color name="water_detail_item_background">#ffffff</color>
+    <color name="water_detail_company_num">#0aabfe</color>
+    <color name="water_detail_btn_text">#ffffff</color>
+    <color name="water_detail_list_text">#000000</color>
+    <color name="water_detail_linearlayout_background">#ffffff</color>
+    <color name="water_detail_userinfo_background">@android:color/transparent</color>
+    <!--欠费查询-->
+    <color name="arrears_text">#000000</color>
+    <color name="arrears_background">#f0f0f0</color>
+    <color name="arrears_item_background">#ffffff</color>
+    <color name="arrears_company_num">#f33637</color>
+    <color name="arrears_btn_text">#ffffff</color>
+    <color name="arrears_list_text">#000000</color>
+    <color name="arrears_userinfo_background">@android:color/transparent</color>
+    <color name="arrears_linearlayout_background">#ffffff</color>
+    <!--收费记录查询-->
+    <color name="charge_text">#000000</color>
+    <color name="charge_background">#f0f0f0</color>
+    <color name="charge_item_background">#ffffff</color>
+    <color name="charge_company_num">#0aabfe</color>
+    <color name="charge_btn_text">#ffffff</color>
+    <color name="charge_userinfo_background">@android:color/transparent</color>
+    <color name="charge_list_text">#000000</color>
+    <color name="charge_linearlayout_background">#ffffff</color>
+    <!--用户通水-->
+    <color name="through_water_text">#000000</color>
+    <color name="through_water_background">#f0f0f0</color>
+    <color name="through_water_item__background">#ffffff</color>
+    <color name="through_water_num">#ff7425</color>
+    <color name="through_water_linearlayout_background">#ffffff</color>
+    <color name="through_water_btn_text">#ffffff</color>
+    <color name="through_water_userinfo_background">@android:color/transparent</color>
+    <color name="through_water_button_border">#4b9403</color>
+    <color name="through_water_button_background">#5ab501</color>
+    <color name="through_water_button_background_pressed">#4fa20f</color>
+    <!--用户停水-->
+    <color name="stop_water_text">#000000</color>
+    <color name="stop_water_background">#f0f0f0</color>
+    <color name="stop_water_item_background">#ffffff</color>
+    <color name="stop_water_num">#ff7425</color>
+    <color name="stop_water_linearlayout_background">#ffffff</color>
+    <color name="stop_water_btn_text">#ffffff</color>
+    <color name="stop_water_userinfo_background">@android:color/transparent</color>
+    <color name="stop_water_through_border">#0988c9</color>
+    <color name="stop_water_through_normal">#0aabfe</color>
+    <color name="stop_water_through_pressed">#0992d8</color>
+    <color name="stop_water_stop_border">#4b9403</color>
+    <color name="stop_water_stop_normal">#5ab501</color>
+    <color name="stop_water_stop_pressed">#4fa20f</color>
+    <!--水费通知单-->
+    <color name="water_charge_text">#000000</color>
+    <color name="water_charge_background">#f0f0f0</color>
+    <color name="water_charge_item_background">#ffffff</color>
+    <color name="water_charge_num">#ff7425</color>
+    <color name="water_charge_linearlayout_background">#ffffff</color>
+    <color name="water_charge_btn_text">#ffffff</color>
+    <color name="water_charge_userinfo_background">@android:color/transparent</color>
+    <color name="water_charge_pressed">#e5ffffff</color>
+    <color name="water_charge_normal">#ffffff</color>
+    <color name="water_charge_print_icon">#0aabfe</color>
+    <!--通知公告-->
+    <color name="company_toolbarbg">#0aabfe</color>
+    <color name="company_bg">#f0f0f0</color>
+    <color name="company_zhengwbg">#ffffff</color>
+    <color name="company_markdian">#818181</color>
+    <color name="company_textc">#999999</color>
+    <!--蓝牙打印-->
+    <color name="bluetooth_text">#000000</color>
+    <color name="bluetooth_list_divider">#f0f0f0</color>
+    <color name="bluetooth_list_background">#ffffff</color>
+    <color name="bluetooth_background">#f0f0f0</color>
+    <color name="bluetooth_discovery_pressed">#e9e9e9</color>
+    <color name="bluetooth_btn_text">#ffffff</color>
+    <color name="meter_text">#000</color>
+</resources>

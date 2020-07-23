@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hh_tv_toast_content"
+    style="@style/hh_wr_wr"
+    android:background="@drawable/hh_shape_custom_toast_bg"
+    android:textColor="@android:color/white"
+    android:textSize="16sp" />

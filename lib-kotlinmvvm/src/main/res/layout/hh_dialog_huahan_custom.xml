@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/hh_wr_wr"
+    android:padding="30dp"
+    android:gravity="center"
+    android:background="@drawable/hh_shape_custom_dialog_bg"
+    android:orientation="vertical" >
+    
+     <com.mtjsoft.www.kotlinmvputils.view.SpinnerLoader
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:point_color="@color/white"
+        />
+     <TextView 
+         style="@style/text_white_14_w_w"
+         android:layout_gravity="center_vertical"
+         android:text="loding..."
+         android:layout_marginTop="5dp"
+         android:id="@+id/hh_tv_dialog_content"
+         />
+</LinearLayout>

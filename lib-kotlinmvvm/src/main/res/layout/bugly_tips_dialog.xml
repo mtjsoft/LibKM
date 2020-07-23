@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6000"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:background="@drawable/shape_ll_code_tip"
+        android:gravity="center"
+        android:orientation="vertical">
+        <!-- 【必设】标题控件tag：beta_title-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:tag="beta_title"
+            android:text="title"
+            android:textColor="#273238"
+            android:textSize="18sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp">
+            <!-- 【必设】提示消息控件tag：beta_tip_message-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:tag="beta_tip_message"
+                android:text="message"
+                android:textColor="#273238"
+                android:textSize="14sp" />
+        </ScrollView>
+
+        <View
+            android:id="@+id/line_h"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/check_code_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <!-- 【必设】取消按钮tag：beta_cancel_button-->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_tv_dialog_left_click"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:tag="beta_cancel_button"
+                android:text="@string/cancel"
+                android:textColor="#757575"
+                android:textSize="16sp" />
+            <!-- 【必设】确认按钮tag：beta_confirm_button-->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_tv_dialog_right_click"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:tag="beta_confirm_button"
+                android:text="@string/sure"
+                android:textColor="#273238"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

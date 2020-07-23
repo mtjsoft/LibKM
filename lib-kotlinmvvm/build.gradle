@@ -1,0 +1,110 @@
+apply plugin: 'com.android.library'
+//引入kotlin
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.gitee.mtj_java'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    //这个是ARouter需要配置的kapt
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //支持java8
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+    dependencies {
+        implementation fileTree(include: ['*.jar'], dir: 'libs')
+        testImplementation rootProject.ext.dependencies["junit"]
+        androidTestImplementation rootProject.ext.dependencies["ext_junit"]
+        androidTestImplementation rootProject.ext.dependencies["espresso_core"]
+        api rootProject.ext.dependencies["multidex"]
+        api rootProject.ext.dependencies["appcompat"]
+        api rootProject.ext.dependencies["constraintlayout"]
+        api rootProject.ext.dependencies["core_ktx"]
+        api rootProject.ext.dependencies["lifecycle_extensions"]
+        api rootProject.ext.dependencies["recyclerview"]
+        api rootProject.ext.dependencies["cardview"]
+        api rootProject.ext.dependencies["support_v4"]
+        api rootProject.ext.dependencies["material"]
+
+        //引入rxhttp
+        api rootProject.ext.dependencies["rxhttp"]
+        kapt rootProject.ext.dependencies["rxhttp_compiler"]
+        api rootProject.ext.dependencies["okhttp3"]
+        api rootProject.ext.dependencies["rxlife_coroutine"]
+
+        //rxlifecycle2
+        api rootProject.ext.dependencies["rxlifecycle"]
+        api rootProject.ext.dependencies["rxlifecycle_components"]
+
+        api rootProject.ext.dependencies["gson"]
+        api rootProject.ext.dependencies["kotlin_stdlib"]
+        api rootProject.ext.dependencies["kotlin_stdlib_jdk7"]
+        api rootProject.ext.dependencies["anko_commons"]
+
+        api rootProject.ext.dependencies["eventbus"]
+        api rootProject.ext.dependencies["avi"]
+        api rootProject.ext.dependencies["autosize"]
+
+        api rootProject.ext.dependencies["glide"]
+        annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+        api rootProject.ext.dependencies["glide_okhttp3"]
+
+        api rootProject.ext.dependencies["BigImageViewPager"]
+        api rootProject.ext.dependencies["SmartRefreshLayout"]
+        api rootProject.ext.dependencies["SmartRefreshHeader"]
+        api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+
+        // arouter
+        api rootProject.ext.dependencies["arouter"]
+        kapt rootProject.ext.dependencies["arouter-compiler"]
+
+        // 图片选择框架
+        api rootProject.ext.dependencies["ImageSelector"]
+        api rootProject.ext.dependencies["roundedimageview"]
+        api rootProject.ext.dependencies["circleimageview"]
+
+        api rootProject.ext.dependencies["mmkv_static"]
+        api rootProject.ext.dependencies["ShapeView"]
+        api rootProject.ext.dependencies["flexbox"]
+        api rootProject.ext.dependencies["immersionbar"]
+        api rootProject.ext.dependencies["immersionbar_components"]
+        api rootProject.ext.dependencies["immersionbar_ktx"]
+        api rootProject.ext.dependencies["statusbarutil"]
+    }
+}
+

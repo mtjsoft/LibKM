@@ -1,0 +1,4 @@
+include ':module-login'
+include ':lib-kotlinmvvm'
+include ':app'
+rootProject.name = "LibKotlinMvvM"
