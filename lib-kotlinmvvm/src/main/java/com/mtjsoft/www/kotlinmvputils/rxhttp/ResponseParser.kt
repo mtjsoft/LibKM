@@ -1,18 +1,9 @@
 package com.mtjsoft.www.kotlinmvputils.rxhttp
 
-import com.google.gson.GsonBuilder
 import com.mtjsoft.www.kotlinmvputils.rxhttp.entity.PageList
 import com.mtjsoft.www.kotlinmvputils.rxhttp.entity.Response
-import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.DoubleDefault0Adapter
-import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.IntegerDefault0Adapter
-import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.LongDefault0Adapter
-import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.MyTypeAdapterFactory
-import com.mtjsoft.www.kotlinmvputils.utils.KLog
-import rxhttp.RxHttpPlugins
 import rxhttp.wrapper.annotation.Parser
-import rxhttp.wrapper.converter.GsonConverter
 import rxhttp.wrapper.entity.ParameterizedTypeImpl
-import rxhttp.wrapper.exception.ExceptionHelper
 import rxhttp.wrapper.exception.ParseException
 import rxhttp.wrapper.parse.AbstractParser
 import java.io.IOException
@@ -47,15 +38,6 @@ open class ResponseParser<T> : AbstractParser<T> {
     override fun onParse(response: okhttp3.Response): T {
         //获取泛型类型
         val type: Type = ParameterizedTypeImpl[Response::class.java, mType]
-        // 自定义Gson解析，将null替换成空字符串
-        val gson = GsonBuilder()
-            .disableHtmlEscaping()
-            .registerTypeAdapter(Integer::class.java, IntegerDefault0Adapter())
-            .registerTypeAdapter(Double::class.java, DoubleDefault0Adapter())
-            .registerTypeAdapter(Long::class.java, LongDefault0Adapter())
-            .registerTypeAdapterFactory(MyTypeAdapterFactory())
-            .create()
-        RxHttpPlugins.setConverter(GsonConverter.create(gson))
         val data: Response<T> = convert(response, type)
         var t = data.datas //获取data字段
         if (t == null && mType === String::class.java) {

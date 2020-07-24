@@ -9,12 +9,19 @@ import android.os.StrictMode
 import android.text.TextUtils
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.gson.GsonBuilder
 import com.mtjsoft.www.kotlinmvputils.glide.GlideLoadUtil
 import com.mtjsoft.www.kotlinmvputils.imp.IComponentApplication
 import com.mtjsoft.www.kotlinmvputils.manager.AndBaseTopViewInfo
+import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.DoubleDefault0Adapter
+import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.IntegerDefault0Adapter
+import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.LongDefault0Adapter
+import com.mtjsoft.www.kotlinmvputils.rxhttp.gson.MyTypeAdapterFactory
 import com.mtjsoft.www.kotlinmvputils.utils.KLog
 import com.tencent.mmkv.MMKV
 import com.yuyh.library.imgsel.ISNav
+import rxhttp.RxHttpPlugins
+import rxhttp.wrapper.converter.GsonConverter
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
@@ -61,6 +68,15 @@ abstract class BaseApplication : MultiDexApplication() {
             ISNav.getInstance().init { context, path, imageView ->
                 GlideLoadUtil.setImage2Glide(path, R.drawable.ic_default_image, imageView)
             }
+            // 自定义Gson解析，将null替换成空字符串
+            val gson = GsonBuilder()
+                .disableHtmlEscaping()
+                .registerTypeAdapter(Integer::class.java, IntegerDefault0Adapter())
+                .registerTypeAdapter(Double::class.java, DoubleDefault0Adapter())
+                .registerTypeAdapter(Long::class.java, LongDefault0Adapter())
+                .registerTypeAdapterFactory(MyTypeAdapterFactory())
+                .create()
+            RxHttpPlugins.setConverter(GsonConverter.create(gson))
         }
     }
 

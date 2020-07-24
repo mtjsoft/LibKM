@@ -63,7 +63,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:background">@color/transparent</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
@@ -193,22 +193,22 @@
         <item name="android:textColor">@color/white</item>
     </style>
     <!-- 主题色 -->
-    <style name="text_green_14_w_w" parent="@style/hh_wr_wr">
+    <style name="text_main_14_w_w" parent="@style/hh_wr_wr">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/main_base_color</item>
     </style>
 
-    <style name="text_green_14_f_w" parent="@style/hh_fi_wr">
+    <style name="text_main_14_f_w" parent="@style/hh_fi_wr">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/main_base_color</item>
     </style>
 
-    <style name="text_green_12_w_w" parent="@style/hh_wr_wr">
+    <style name="text_main_12_w_w" parent="@style/hh_wr_wr">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/main_base_color</item>
     </style>
 
-    <style name="text_green_14_w_w_w" parent="@style/weight_width_wr">
+    <style name="text_main_14_w_w_w" parent="@style/weight_width_wr">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/main_base_color</item>
     </style>

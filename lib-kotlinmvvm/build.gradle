@@ -119,6 +119,8 @@ android {
         api rootProject.ext.dependencies["immersionbar_components"]
         api rootProject.ext.dependencies["immersionbar_ktx"]
         api rootProject.ext.dependencies["statusbarutil"]
+
+        api rootProject.ext.dependencies["PermissionX"]
     }
 }
 

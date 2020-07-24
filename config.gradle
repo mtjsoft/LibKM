@@ -123,9 +123,12 @@ ext {
             // 蓝牙
             "blelibrary"                   : "cn.com.superLei:blelibrary:3.1.0",
 
-            "GridPager"                    : "com.github.mtjsoft:GridPager:v3.1.0",
+            "GridPager"                    : "com.github.mtjsoft:GridPager:v3.2.0",
 
-            "UploadMultiImageView"         : "com.gitee.mtj_java:UploadMultiImageView:1.0.0"
+            "UploadMultiImageView"         : "com.gitee.mtj_java:UploadMultiImageView:1.0.0",
+
+            // 权限申请库
+            "PermissionX"                  : "com.permissionx.guolindev:permissionx:1.3.0"
     ]
 
 }
