@@ -32,7 +32,7 @@ android {
             // 移除无用文件
             shrinkResources false
             // 开启混淆
-            minifyEnabled true
+            minifyEnabled false
             // zipAlign优化
             zipAlignEnabled true
             // 不显示Log
