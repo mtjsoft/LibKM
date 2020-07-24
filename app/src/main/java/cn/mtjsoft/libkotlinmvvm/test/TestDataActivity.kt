@@ -3,14 +3,10 @@ package cn.mtjsoft.libkotlinmvvm.test
 import android.os.Message
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.rxLifeScope
 import cn.mtjsoft.libkotlinmvvm.R
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mtjsoft.www.kotlinmvputils.base.BaseDataActivity
-import com.mtjsoft.www.kotlinmvputils.constants.RouterConstants
 import com.mtjsoft.www.kotlinmvputils.model.LoadState
-import kotlinx.coroutines.async
-import okhttp3.internal.wait
 
 /**
  * @author mtj
@@ -47,7 +43,7 @@ class TestDataActivity : BaseDataActivity<TestDataViewModel>() {
 
     override fun onClick(p0: View) {
         super.onClick(p0)
-        ARouter.getInstance().build(RouterConstants.LOGIN_ACTIVITY).navigation()
+        ARouter.getInstance().build("/login/loginActivity").navigation()
     }
 
     override fun processHandlerMsg(msg: Message) {

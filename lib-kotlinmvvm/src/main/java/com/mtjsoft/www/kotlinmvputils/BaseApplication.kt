@@ -30,15 +30,6 @@ import java.util.*
 
 abstract class BaseApplication : MultiDexApplication() {
 
-    private val modulesList = arrayListOf(
-        "com.suntront.module_login.ModuleApp",
-        "com.suntront.module_mine.ModuleApp",
-        "com.suntront.module_metertask.ModuleApp",
-        "com.suntront.module_datasynch.appliction.ModuleApp",
-        "com.suntront.module_bluetooth.appliction.ModuleApp",
-        "com.suntront.module_arcgis.appliction.ModuleApp"
-    )
-
     override fun onCreate() {
         super.onCreate()
         //配置统一标题栏样式
@@ -62,8 +53,6 @@ abstract class BaseApplication : MultiDexApplication() {
 //            KLog.init(BuildConfig.DEBUG)
             ARouter.init(this)
             MMKV.initialize(this)
-            //Module类的APP初始化
-            modulesApplicationInit(modulesList)
             // 自定义图片加载器
             ISNav.getInstance().init { context, path, imageView ->
                 GlideLoadUtil.setImage2Glide(path, R.drawable.ic_default_image, imageView)

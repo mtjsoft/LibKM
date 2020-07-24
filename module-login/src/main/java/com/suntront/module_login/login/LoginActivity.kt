@@ -8,7 +8,6 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ImmersionBar
 import com.mtjsoft.www.kotlinmvputils.base.BaseActivity
-import com.mtjsoft.www.kotlinmvputils.constants.RouterConstants
 import com.mtjsoft.www.kotlinmvputils.imp.PermissionsResultListener
 import com.suntront.module_login.R
 import kotlinx.android.synthetic.main.activity_login.*
@@ -20,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_login.*
  * @date 2020-05-25 15:40:04
  */
 
-@Route(path = RouterConstants.LOGIN_ACTIVITY)
+@Route(path = "/login/loginActivity")
 class LoginActivity : BaseActivity<LoginViewModel>() {
 
     override fun layoutResId(): Int {

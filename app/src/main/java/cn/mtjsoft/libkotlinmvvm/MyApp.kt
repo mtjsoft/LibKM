@@ -11,6 +11,10 @@ import java.util.concurrent.TimeUnit
 
 class MyApp : BaseApplication() {
 
+    private val modulesList = arrayListOf(
+        "com.suntront.module_login.ModuleApp"
+    )
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         // 安装tinker
@@ -27,6 +31,7 @@ class MyApp : BaseApplication() {
             .build()
         RxHttp.init(okHttpClient, BuildConfig.DEBUG)
 
+        modulesApplicationInit(modulesList)
         // 设置升级检查周期为60s(默认检查周期为0s)，60s内SDK不重复向后台请求策略)
 //          Beta.upgradeCheckPeriod = 60 * 1000
         // 升级SDK默认是开启热更新能力的，如果你不需要使用热更新，可以将这个接口设置为false。
