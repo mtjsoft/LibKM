@@ -35,7 +35,7 @@ abstract class BaseRecycleviewActivity<T, VM : BaseRecycleViewModel<T>> : BaseTo
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack()
         //加载状态
-        viewModel.loadViewManager.value = AndLoadViewManager(getBaseCenterLayout(), this)
+        viewModel.loadViewManager.value = AndLoadViewManager(this, getBaseCenterLayout(), this)
         changeLoadState(LoadState.LOADING)
         viewModel.setDefData()
         viewModel.swipeRefreshLayout = swipe_refresh

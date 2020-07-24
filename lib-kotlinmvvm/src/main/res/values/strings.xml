@@ -31,6 +31,8 @@
     <string name="permission">请您点击确认申请权限,否则应用不能正常使用!</string>
     <string name="permission_must">必要的权限被拒绝,请手动开启!否则应用将无法正常使用！</string>
 
+    <string name="strUpgradeDialogFeatureLabel">功能说明：</string>
+
     <!--  公共  -->
     <!--字体图标-->
     <string name="toolbar_back_icon">&#xe625;</string>

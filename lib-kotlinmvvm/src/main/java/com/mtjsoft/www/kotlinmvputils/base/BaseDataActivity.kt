@@ -15,7 +15,7 @@ import com.mtjsoft.www.kotlinmvputils.model.LoadState
  * @author mtj
  */
 
-abstract class BaseDataActivity<VM : BaseViewModel>: BaseTopViewActivity(), LoadViewImp {
+abstract class BaseDataActivity<VM : BaseViewModel> : BaseTopViewActivity(), LoadViewImp {
 
     lateinit var viewModel: VM
 
@@ -32,7 +32,7 @@ abstract class BaseDataActivity<VM : BaseViewModel>: BaseTopViewActivity(), Load
         val boolean = initView()
         if (boolean) {
             if (loadViewManager == null) {
-                loadViewManager = AndLoadViewManager(getBaseCenterLayout(), this)
+                loadViewManager = AndLoadViewManager(this, getBaseCenterLayout(), this)
             }
             changeLoadState(LoadState.LOADING)
         }
@@ -51,7 +51,7 @@ abstract class BaseDataActivity<VM : BaseViewModel>: BaseTopViewActivity(), Load
         loadViewManager?.changeLoadState(state)
     }
 
-    fun getLoadViewManager():AndLoadViewManager? = loadViewManager
+    fun getLoadViewManager(): AndLoadViewManager? = loadViewManager
 
     override fun onDestroy() {
         //解除ViewModel生命周期感应
@@ -75,7 +75,8 @@ abstract class BaseDataActivity<VM : BaseViewModel>: BaseTopViewActivity(), Load
     private fun registorUIChangeLiveDataCallBack() {
         //加载对话框显示
         viewModel.getUC().getShowLoadingEvent().observe(this, Observer {
-            showLoadingUI(it[BaseViewModel.ParameterField.MSG].toString(),
+            showLoadingUI(
+                it[BaseViewModel.ParameterField.MSG].toString(),
                 it[BaseViewModel.ParameterField.IS_CANCLE] as Boolean
             )
         })

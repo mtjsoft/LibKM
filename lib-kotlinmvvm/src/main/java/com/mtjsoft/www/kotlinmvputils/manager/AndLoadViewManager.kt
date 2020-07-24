@@ -3,10 +3,16 @@ package com.mtjsoft.www.kotlinmvputils.manager
 import android.graphics.drawable.AnimationDrawable
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.mtjsoft.www.kotlinmvputils.R
 import com.mtjsoft.www.kotlinmvputils.imp.LoadViewImp
 import com.mtjsoft.www.kotlinmvputils.model.LoadState
@@ -19,19 +25,29 @@ import java.util.*
  *
  * @author mtj
  */
-class AndLoadViewManager(var baseView: FrameLayout, var mLoadViewImp: LoadViewImp) {
-    private var mLoadingLayout: RelativeLayout? = null
+class AndLoadViewManager(
+    lifecycleOwner: LifecycleOwner,
+    var baseView: FrameLayout,
+    var mLoadViewImp: LoadViewImp
+) {
+    private var mLoadingLayout: RelativeLayout
     private var isAdded: Boolean = false
     private var animationDrawable: AnimationDrawable? = null
+
     // 正在加载，加载失败和没有数据的View
     private var mLoaddingView: View
+
     // mLoaddingView中显示图片的View
     private var mLoaddingImageView: ImageView
     private var avi: AVLoadingIndicatorView
+
     // mLoaddingView中显示文字的View
     private var mLoadContentTextView: TextView
+
     //控制各个状态下显示的图片和文字
     private val mLoadViewInfoMap = HashMap<LoadState, LoadViewInfo>()
+
+    private var animationOut: Animation
 
     init {
         isAdded = false
@@ -41,6 +57,22 @@ class AndLoadViewManager(var baseView: FrameLayout, var mLoadViewImp: LoadViewIm
         avi = mLoaddingView.findViewById(R.id.avi) as AVLoadingIndicatorView
         mLoadContentTextView = mLoaddingView.findViewById(R.id.tv_loading_msg) as TextView
         mLoadingLayout = mLoaddingView.findViewById(R.id.ll_loading_layout) as RelativeLayout
+        animationOut = AnimationUtils.loadAnimation(baseView.context, R.anim.anim_alpha_out)
+
+        lifecycleOwner.lifecycle.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(
+                source: LifecycleOwner,
+                event: Lifecycle.Event
+            ) {
+                if (Lifecycle.Event.ON_DESTROY == event) {
+                    animationOut.cancel()
+                    if (animationDrawable != null && animationDrawable!!.isRunning) {
+                        animationDrawable!!.stop()
+                        animationDrawable = null
+                    }
+                }
+            }
+        })
     }
 
     /**
@@ -57,7 +89,7 @@ class AndLoadViewManager(var baseView: FrameLayout, var mLoadViewImp: LoadViewIm
                 avi.visibility = View.VISIBLE
                 avi.show()
                 changeTipViewInfo(state)
-                mLoadingLayout!!.visibility = View.VISIBLE
+                mLoadingLayout.visibility = View.VISIBLE
 //                if (animationDrawable == null) {
 //                    animationDrawable = mLoaddingImageView.background as AnimationDrawable
 //                    animationDrawable!!.start()
@@ -75,18 +107,29 @@ class AndLoadViewManager(var baseView: FrameLayout, var mLoadViewImp: LoadViewIm
             }
             LoadState.SUCCESS -> {
                 //从页面中移除掉
-                if (animationDrawable != null && animationDrawable!!.isRunning) {
-                    animationDrawable!!.stop()
-                    animationDrawable = null
-                }
-                avi.visibility = View.GONE
-                avi.hide()
-                if (mLoadingLayout != null && isAdded) {
-                    val count = baseView.childCount
-                    if (count > 0) {
-                        baseView.removeViewAt(count - 1)
-                        isAdded = false
-                    }
+                if (isAdded) {
+                    animationOut.setAnimationListener(object : Animation.AnimationListener {
+                        override fun onAnimationRepeat(animation: Animation?) {
+                        }
+
+                        override fun onAnimationEnd(animation: Animation?) {
+                            if (animationDrawable != null && animationDrawable!!.isRunning) {
+                                animationDrawable!!.stop()
+                                animationDrawable = null
+                            }
+                            avi.visibility = View.GONE
+                            avi.hide()
+                            val count = baseView.childCount
+                            if (count > 0) {
+                                baseView.removeViewAt(count - 1)
+                                isAdded = false
+                            }
+                        }
+
+                        override fun onAnimationStart(animation: Animation?) {
+                        }
+                    })
+                    mLoadingLayout.startAnimation(animationOut)
                 }
             }
         }
@@ -184,7 +227,7 @@ class AndLoadViewManager(var baseView: FrameLayout, var mLoadViewImp: LoadViewIm
             mLoadContentTextView.text = hhLoadViewInfo.msgInfo
         }
         //加载的视图添加到页面中
-        if (!isAdded && mLoadingLayout != null) {
+        if (!isAdded) {
             baseView.addView(mLoadingLayout, baseView.childCount)
             isAdded = true
         }

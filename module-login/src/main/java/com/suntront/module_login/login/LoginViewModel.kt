@@ -1,6 +1,7 @@
 package com.suntront.module_login.login
 
 import android.text.TextUtils
+import androidx.lifecycle.rxLifeScope
 import com.mtjsoft.www.kotlinmvputils.base.BaseViewModel
 import com.mtjsoft.www.kotlinmvputils.event.SingleLiveEvent
 

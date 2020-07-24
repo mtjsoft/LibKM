@@ -48,11 +48,11 @@ abstract class BaseApplication : MultiDexApplication() {
         // 获取当前进程名
         val processName = getProcessName(Process.myPid())
         if (processName == null || processName == packageName) {
-            if (BuildConfig.DEBUG) {
-                ARouter.openLog()
-                ARouter.openDebug()
-            }
-            KLog.init(BuildConfig.DEBUG)
+//            if (BuildConfig.DEBUG) {
+//                ARouter.openLog()
+//                ARouter.openDebug()
+//            }
+//            KLog.init(BuildConfig.DEBUG)
             ARouter.init(this)
             MMKV.initialize(this)
             //Module类的APP初始化

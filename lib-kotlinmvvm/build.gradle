@@ -29,8 +29,22 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            // 移除无用文件
+            shrinkResources false
+            // 开启混淆
+            minifyEnabled true
+            // zipAlign优化
+            zipAlignEnabled true
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            zipAlignEnabled false
+            debuggable true
+            jniDebuggable true
         }
     }
 

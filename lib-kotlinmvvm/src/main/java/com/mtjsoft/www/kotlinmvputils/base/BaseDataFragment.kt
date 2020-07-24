@@ -41,7 +41,7 @@ abstract class BaseDataFragment<VM : BaseViewModel>: BaseTopViewFragment(), View
     private var loadViewManager: AndLoadViewManager? = null
     override fun changeLoadState(state: LoadState) {
         if (loadViewManager == null) {
-            loadViewManager = AndLoadViewManager(getBaseCenterLayout(), this)
+            loadViewManager = AndLoadViewManager(this, getBaseCenterLayout(), this)
         }
         loadViewManager!!.changeLoadState(state)
     }
