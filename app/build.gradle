@@ -75,7 +75,8 @@ dependencies {
     // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker） 1.9.14.7
     api 'com.tencent.tinker:tinker-android-lib:1.9.9'
 
-    implementation project(':lib-kotlinmvvm')
+//    implementation project(':lib-kotlinmvvm')
+    implementation rootProject.ext.dependencies["LibKM"]
     // false 代表运行整个项目 true 分模块运行
     if (!isBuildModule.toBoolean()) {
         // 引入 登录模块

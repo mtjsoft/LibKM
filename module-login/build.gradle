@@ -1,4 +1,3 @@
-
 apply from: "../component_build.gradle"
 
 android {
@@ -14,5 +13,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //引入kotlinmvvm
-    implementation project(':lib-kotlinmvvm')
+//    implementation project(':lib-kotlinmvvm')
+    implementation rootProject.ext.dependencies["LibKM"]
 }

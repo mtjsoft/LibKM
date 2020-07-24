@@ -15,7 +15,7 @@ ext {
     ]
 
     dependencies = [
-            "LibKM"                        : "com.gitee.mtj_java:LibKM:1.0.0",
+            "LibKM"                        : "com.gitee.mtj_java:LibKM:1.0.1",
 
             "gradle"                       : "com.android.tools.build:gradle:3.5.3",
             "kotlin_gradle_plugin"         : "org.jetbrains.kotlin:kotlin-gradle-plugin:${version["kotlin_version"]}",
