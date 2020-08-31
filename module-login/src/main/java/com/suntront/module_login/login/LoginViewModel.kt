@@ -1,9 +1,11 @@
 package com.suntront.module_login.login
 
 import android.text.TextUtils
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.rxLifeScope
 import com.mtjsoft.www.kotlinmvputils.base.BaseViewModel
 import com.mtjsoft.www.kotlinmvputils.event.SingleLiveEvent
+import com.mtjsoft.www.kotlinmvputils.utils.KLog
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 
@@ -15,20 +17,12 @@ import kotlinx.coroutines.delay
 
 class LoginViewModel : BaseViewModel() {
 
-    private val nameSingleLiveEvent: SingleLiveEvent<String> = SingleLiveEvent()
+    val nameSingleLiveEvent = MutableLiveData<String>()
 
-    private val pswSingleLiveEvent: SingleLiveEvent<String> = SingleLiveEvent()
-
-
-    fun setName(name: String) {
-        nameSingleLiveEvent.value = name
-    }
-
-    fun setPsw(psw: String) {
-        pswSingleLiveEvent.value = psw
-    }
+    val pswSingleLiveEvent = MutableLiveData<String>()
 
     fun login() {
+        KLog.e(nameSingleLiveEvent.value + "," + pswSingleLiveEvent.value)
         if (TextUtils.isEmpty(nameSingleLiveEvent.value)) {
             showToastUI("请输入账号")
             return

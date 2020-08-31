@@ -2,6 +2,9 @@ package com.mtjsoft.www.kotlinmvputils.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
@@ -10,9 +13,18 @@ import androidx.lifecycle.ViewModelProvider
  * @author mtj
  */
 
-abstract class BaseFragment<VM : BaseViewModel> : BaseTopViewFragment() {
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : BaseTopViewFragment() {
 
     lateinit var viewModel: VM
+    lateinit var binding: V
+
+    // 通过DataBinding添加布局
+    override fun initaddView(): View {
+        binding =
+            DataBindingUtil.inflate(layoutInflater, layoutResId(), baseCenterFrameLayout, false)
+        binding.lifecycleOwner = this
+        return binding.root
+    }
 
     override fun initBaseView() {
         initVM()
@@ -26,11 +38,20 @@ abstract class BaseFragment<VM : BaseViewModel> : BaseTopViewFragment() {
         initData()
     }
 
+    /**
+     * 初始化ViewModel的id
+     *
+     * @return BR的id
+     */
+    protected abstract fun initVariableId(): Int
+
+    protected abstract fun layoutResId(): Int
+
     protected abstract fun initView()
 
     protected abstract fun initData()
 
-    protected abstract fun providerVMClass(): Class<VM>?
+    protected abstract fun providerVMClass(): Class<VM>
 
 
     override fun onDestroy() {

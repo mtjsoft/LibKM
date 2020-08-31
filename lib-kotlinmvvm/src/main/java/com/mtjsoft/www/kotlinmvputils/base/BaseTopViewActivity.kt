@@ -23,12 +23,12 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jaeger.library.StatusBarUtil
 import com.mtjsoft.www.kotlinmvputils.R
@@ -91,34 +91,37 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
     val GONE = View.GONE
     val INVISIBLE = View.INVISIBLE
 
-    protected val TAG = CommonUtils.getTag(this)
-
-    //添加的view
-    private var addCenterCiew: View? = null
+    // 跟布局
+    lateinit var baseRelativeLayout: RelativeLayout
+    lateinit var baseTopLinearLayout: LinearLayout
+    lateinit var baseCenterFrameLayout: FrameLayout
+    lateinit var baseBottomLinearLayout: LinearLayout
 
     //
-    private var topView: View? = null
-    private var toolbar: Toolbar? = null
-    private var textTitle: TextView? = null
+    private lateinit var topView: View
+    private lateinit var toolbar: Toolbar
+    private lateinit var textTitle: TextView
     private var isShowBackView: Boolean = true
     private var isShowTopView: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.base_layout)
         //ARouter inject 注入
         ARouter.getInstance().inject(this)
         AndActivityUtils.instance.addActivity(this)
-        setContentView(R.layout.base_layout)
+        baseRelativeLayout = findViewById(R.id.base_layout)
+        baseTopLinearLayout = findViewById(R.id.top_layout)
+        baseCenterFrameLayout = findViewById(R.id.center_layout)
+        baseBottomLinearLayout = findViewById(R.id.bottom_layout)
+        baseCenterFrameLayout.addView(initaddView(), 0)
         topView = inflateView(R.layout.include_toolbar)
-        toolbar = topView!!.findViewById(R.id.toolbar) as Toolbar
-        textTitle = topView!!.findViewById(R.id.tv_title) as TextView
-        addCenterCiew = initaddView()
-        getBaseCenterLayout().addView(addCenterCiew, 0)
+        toolbar = topView.findViewById(R.id.toolbar) as Toolbar
+        textTitle = topView.findViewById(R.id.tv_title) as TextView
         initBaseView()
         if (isShowTopView) {
             initTopTitle()
         }
-        initSwipeBackFinish()
         if (isRegisteredEventBus) {
             AndEventBusUtils.register(this)
         }
@@ -135,16 +138,16 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
     private fun initTopTitle() {
         val andBaseTopViewInfo = AndBaseTopViewInfo
         if (andBaseTopViewInfo.backgroundColor == -1) {
-            toolbar!!.setBackgroundColor(Color.RED)
+            toolbar.setBackgroundColor(Color.RED)
         } else {
-            toolbar!!.setBackgroundColor(getColor_(andBaseTopViewInfo.backgroundColor))
+            toolbar.setBackgroundColor(getColor_(andBaseTopViewInfo.backgroundColor))
         }
         if (AndBaseTopViewInfo.titleMode == AndBaseTopViewInfo.TitleMode.LEFT) {
-            toolbar!!.setTitleTextColor(andBaseTopViewInfo.titleTextColor)
+            toolbar.setTitleTextColor(andBaseTopViewInfo.titleTextColor)
             //toolbar字体大小在stytle里面调整
         } else {
-            textTitle!!.setTextColor(andBaseTopViewInfo.titleTextColor)
-            textTitle!!.textSize = (andBaseTopViewInfo.titleSize).toFloat()
+            textTitle.setTextColor(andBaseTopViewInfo.titleTextColor)
+            textTitle.textSize = (andBaseTopViewInfo.titleSize).toFloat()
         }
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(isShowBackView)
@@ -173,9 +176,9 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
      */
     fun setPageTitle(title: String) {
         if (AndBaseTopViewInfo.titleMode == AndBaseTopViewInfo.TitleMode.LEFT) {
-            toolbar!!.title = title
+            toolbar.title = title
         } else {
-            textTitle!!.text = title
+            textTitle.text = title
         }
     }
 
@@ -183,8 +186,8 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
      * 设置标题栏背景色
      */
     fun setToolBarBg(backgroundColor: Int) {
-        if (isShowTopView && toolbar != null) {
-            toolbar!!.setBackgroundColor(getColor_(backgroundColor))
+        if (isShowTopView) {
+            toolbar.setBackgroundColor(getColor_(backgroundColor))
         }
     }
 
@@ -192,9 +195,9 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
      * 设置标题颜色
      */
     fun setToolBarTitleColor(titleTextColor: Int) {
-        if (isShowTopView && toolbar != null) {
-            toolbar!!.setTitleTextColor(getColor_(titleTextColor))
-            textTitle!!.setTextColor(getColor_(titleTextColor))
+        if (isShowTopView) {
+            toolbar.setTitleTextColor(getColor_(titleTextColor))
+            textTitle.setTextColor(getColor_(titleTextColor))
         }
     }
 
@@ -202,7 +205,7 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
      * 设置返回按钮
      */
     fun setBackLeftDrawable(backLeftDrawable: Int) {
-        if (isShowTopView && toolbar != null) {
+        if (isShowTopView) {
             supportActionBar!!.setHomeAsUpIndicator(backLeftDrawable)
         }
     }
@@ -212,44 +215,37 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
      */
     fun removeAllBaseTopLayout() {
         isShowTopView = false
-        top_layout.removeAllViews()
+        getBaseTopLayout().removeAllViews()
     }
 
     /**
      * 移除顶部布局
      */
     fun removeBaseTopLayout(position: Int) {
-        if (position < top_layout.childCount) {
-            top_layout.removeViewAt(position)
+        if (position < getBaseTopLayout().childCount) {
+            getBaseTopLayout().removeViewAt(position)
         }
-    }
-
-    /**
-     * 获取添加的中间的view
-     */
-    fun getAddCenterView(): View {
-        return addCenterCiew!!
     }
 
     /**
      * 获取顶部布局
      */
     fun getBaseTopLayout(): LinearLayout {
-        return top_layout
+        return baseTopLinearLayout
     }
 
     /**
      * 获取中间布局
      */
     fun getBaseCenterLayout(): FrameLayout {
-        return center_layout
+        return baseCenterFrameLayout
     }
 
     /**
      * 获取底部布局
      */
     fun getBaseBottomLayout(): LinearLayout {
-        return bottom_layout
+        return baseBottomLinearLayout
     }
 
     /**
@@ -424,13 +420,6 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
     }
 
     /**
-     * log 输出
-     */
-    fun log(msg: String, vararg tags: String) {
-        CommonUtils.log(msg, TAG)
-    }
-
-    /**
      * print log 输出
      */
     fun println(text: Any) {
@@ -559,10 +548,9 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
             e.printStackTrace()
         } catch (e: ClassCastException) {
             e.printStackTrace()
-        } catch (e: java.lang.InstantiationException) {
+        } catch (e: InstantiationException) {
             e.printStackTrace()
         }
-
         return null
     }
 
@@ -702,7 +690,7 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_ASK_PERMISSIONS && permissions != null) {
+        if (requestCode == REQUEST_CODE_ASK_PERMISSIONS) {
             // 获取被拒绝的权限列表
             val deniedPermissions = ArrayList<String>()
             for (permission in permissions) {
@@ -715,7 +703,7 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
                 }
             }
             //存在被拒绝的权限
-            if (deniedPermissions != null && deniedPermissions.size > 0) {
+            if (deniedPermissions.size > 0) {
                 mPermissionsList = deniedPermissions
                 if (mNeedFinish) {
                     showPermissionSettingDialog()
@@ -771,64 +759,5 @@ abstract class BaseTopViewActivity : RxAppCompatActivity(), View.OnClickListener
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         intent.data = Uri.parse("package:" + packageName)
         startActivityForResult(intent, SETTINGS_REQUEST_CODE)
-    }
-
-    /**
-     * 初始化滑动返回
-     */
-    private fun initSwipeBackFinish() {
-        if (isSwipeBackFinish) {
-            val slidingPaneLayout = SlidingPaneLayout(this)
-            //通过反射改变mOverhangSize的值为0，这个mOverhangSize值为菜单到右边屏幕的最短距离，
-            //默认是32dp
-            try {
-                //更改属性
-                val field = SlidingPaneLayout::class.java.getDeclaredField("mOverhangSize")
-                field.isAccessible = true
-                field.set(slidingPaneLayout, 0)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            //设置监听事件
-            slidingPaneLayout.setPanelSlideListener(slideListener())
-            slidingPaneLayout.sliderFadeColor = resources.getColor(R.color.transparent)
-            // 左侧的透明视图
-            val leftView = View(this)
-            leftView.layoutParams =
-                ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-            slidingPaneLayout.addView(leftView, 0)
-            val decorView = window.decorView as ViewGroup
-            // 右侧的内容视图
-            val decorChild = decorView.getChildAt(0) as ViewGroup
-            decorChild.setBackgroundColor(
-                getResources()
-                    .getColor(android.R.color.white)
-            )
-            decorView.removeView(decorChild)
-            decorView.addView(slidingPaneLayout)
-            // 为 SlidingPaneLayout 添加内容视图
-            slidingPaneLayout.addView(decorChild, 1)
-        }
-    }
-
-    /**
-     * 侧滑退出监听
-     */
-    private inner class slideListener : SlidingPaneLayout.PanelSlideListener {
-
-        override fun onPanelSlide(panel: View, slideOffset: Float) {
-
-        }
-
-        override fun onPanelOpened(panel: View) {
-            finish()
-        }
-
-        override fun onPanelClosed(panel: View) {
-
-        }
     }
 }

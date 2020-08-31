@@ -3,15 +3,15 @@ apply plugin: 'com.android.application'
 apply from: "../config_build.gradle"
 
 // 依赖插件脚本
-apply from: 'tinker-support.gradle'
-apply plugin: 'bugly'
-bugly {
-    appId = ""
-    appKey = ""
-    appPackage = "cn.mtjsoft.libkotlinmvvm"
-    appVersion = rootProject.ext.android["versionName"]
-    debug = true
-}
+//apply from: 'tinker-support.gradle'
+//apply plugin: 'bugly'
+//bugly {
+//    appId = ""
+//    appKey = ""
+//    appPackage = "cn.mtjsoft.libkotlinmvvm"
+//    appVersion = rootProject.ext.android["versionName"]
+//    debug = true
+//}
 
 android {
     resourcePrefix "app_" //给 Module 内的资源名增加前缀, 避免资源名冲突
@@ -20,7 +20,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         //bugly 添加到主Dex
-        multiDexKeepProguard file("multidexkeep.pro")
+//        multiDexKeepProguard file("multidexkeep.pro")
     }
 
     signingConfigs {
@@ -68,15 +68,15 @@ android {
 }
 
 dependencies {
-    //bugly  升级SDK and rash上报功能 1.4.5
-    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
-    //bugly NDK  3.7.1
-    api 'com.tencent.bugly:nativecrashreport:latest.release'
-    // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker） 1.9.14.7
-    api 'com.tencent.tinker:tinker-android-lib:1.9.9'
+//    //bugly  升级SDK and rash上报功能 1.4.5
+//    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
+//    //bugly NDK  3.7.1
+//    api 'com.tencent.bugly:nativecrashreport:latest.release'
+//    // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker） 1.9.14.7
+//    api 'com.tencent.tinker:tinker-android-lib:1.9.9'
 
-//    implementation project(':lib-kotlinmvvm')
-    implementation rootProject.ext.dependencies["LibKM"]
+    implementation project(':lib-kotlinmvvm')
+//    implementation rootProject.ext.dependencies["LibKM"]
     // false 代表运行整个项目 true 分模块运行
     if (!isBuildModule.toBoolean()) {
         // 引入 登录模块

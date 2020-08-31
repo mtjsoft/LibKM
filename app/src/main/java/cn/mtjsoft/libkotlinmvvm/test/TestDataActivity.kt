@@ -2,11 +2,11 @@ package cn.mtjsoft.libkotlinmvvm.test
 
 import android.os.Message
 import android.view.View
-import androidx.lifecycle.Observer
+import cn.mtjsoft.libkotlinmvvm.BR
 import cn.mtjsoft.libkotlinmvvm.R
+import cn.mtjsoft.libkotlinmvvm.databinding.ActivityMainBinding
 import com.alibaba.android.arouter.launcher.ARouter
-import com.mtjsoft.www.kotlinmvputils.base.BaseDataActivity
-import com.mtjsoft.www.kotlinmvputils.model.LoadState
+import com.mtjsoft.www.kotlinmvputils.base.BaseActivity
 
 /**
  * @author mtj
@@ -14,31 +14,20 @@ import com.mtjsoft.www.kotlinmvputils.model.LoadState
  * @date 2020-07-24 10:30:48
  */
 
-class TestDataActivity : BaseDataActivity<TestDataViewModel>() {
+class TestDataActivity : BaseActivity<ActivityMainBinding, TestDataViewModel>() {
 
-    override fun layoutResId(): Int {
-        return R.layout.activity_test
-    }
+    override fun initVariableId(): Int = BR.testViewModel
 
-    override fun providerVMClass(): Class<TestDataViewModel>? {
-        return TestDataViewModel::class.java
-    }
+    override fun layoutResId(): Int = R.layout.activity_main
 
-    override fun onPageLoad() {
-        viewModel.loadData()
-    }
+    override fun providerVMClass(): Class<TestDataViewModel> = TestDataViewModel::class.java
 
-    override fun initView(): Boolean {
-        setPageTitle("主页")
+    override fun initView() {
         isShowBackView(false)
+        setPageTitle("测试LibKM")
+    }
 
-        // 监听数据变化
-        viewModel.getNumberLiveData().observe(this, Observer {
-            changeLoadState(LoadState.SUCCESS)
-            toast("$it")
-        })
-
-        return true
+    override fun initData() {
     }
 
     override fun onClick(p0: View) {
@@ -48,4 +37,5 @@ class TestDataActivity : BaseDataActivity<TestDataViewModel>() {
 
     override fun processHandlerMsg(msg: Message) {
     }
+
 }

@@ -7,6 +7,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.gitee.mtj_java'
 
+// 开启协程
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -52,6 +59,11 @@ android {
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //开启databinding
+    dataBinding {
+        enabled = true
     }
 
     sourceSets {

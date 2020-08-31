@@ -4,6 +4,8 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.Nullable
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
@@ -12,23 +14,44 @@ import androidx.lifecycle.ViewModelProvider
  * @author mtj
  */
 
-abstract class BaseActivity<VM : BaseViewModel> : BaseTopViewActivity() {
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : BaseTopViewActivity() {
 
     lateinit var viewModel: VM
+    lateinit var binding: V
 
-    override fun initaddView(): View = inflateView(layoutResId())
+    // 通过DataBinding添加布局
+    override fun initaddView(): View {
+        binding =
+            DataBindingUtil.inflate(layoutInflater, layoutResId(), baseCenterFrameLayout, false)
+        binding.lifecycleOwner = this
+        return binding.root
+    }
 
     override fun initBaseView() {
-        initVM()
-        //让ViewModel拥有View的生命周期感应
-        lifecycle.addObserver(viewModel)
-        //注入RxLifecycle生命周期
-        viewModel.injectLifecycleProvider(this)
+        initVM() // 初始化 viewModel
+        // 绑定 viewModel 数据
+        binding.setVariable(initVariableId(), viewModel)
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack()
         initView()
         initData()
     }
+
+    /**
+     * 初始化VM
+     */
+    private fun initVM() {
+        providerVMClass().let {
+            viewModel = ViewModelProvider(this)[it]
+        }
+    }
+
+    /**
+     * 初始化ViewModel的id
+     *
+     * @return BR的id
+     */
+    protected abstract fun initVariableId(): Int
 
     protected abstract fun layoutResId(): Int
 
@@ -36,7 +59,7 @@ abstract class BaseActivity<VM : BaseViewModel> : BaseTopViewActivity() {
 
     protected abstract fun initData()
 
-    protected abstract fun providerVMClass(): Class<VM>?
+    protected abstract fun providerVMClass(): Class<VM>
 
 
     override fun onDestroy() {
@@ -46,22 +69,18 @@ abstract class BaseActivity<VM : BaseViewModel> : BaseTopViewActivity() {
     }
 
     /**
-     * 初始化VM
-     */
-    private fun initVM() {
-        providerVMClass()?.let {
-            viewModel = ViewModelProvider(this)[it]
-        }
-    }
-
-    /**
      * =====================================================================
      */
     //注册ViewModel与View的契约UI回调事件
     private fun registorUIChangeLiveDataCallBack() {
+        //让ViewModel拥有View的生命周期感应
+        lifecycle.addObserver(viewModel)
+        //注入RxLifecycle生命周期
+        viewModel.injectLifecycleProvider(this)
         //加载对话框显示
         viewModel.getUC().getShowLoadingEvent().observe(this, Observer {
-            showLoadingUI(it[BaseViewModel.ParameterField.MSG].toString(),
+            showLoadingUI(
+                it[BaseViewModel.ParameterField.MSG].toString(),
                 it[BaseViewModel.ParameterField.IS_CANCLE] as Boolean
             )
         })

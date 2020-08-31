@@ -90,9 +90,9 @@ android {
     }
 
 //开启databinding
-//    dataBinding {
-//        enabled = true
-//    }
+    dataBinding {
+        enabled = true
+    }
 
 //生成libs目录
     sourceSets {

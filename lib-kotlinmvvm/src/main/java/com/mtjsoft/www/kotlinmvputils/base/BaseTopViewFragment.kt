@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -41,9 +42,16 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
     val FILTER_TIMEM = 1000L
     var ONE_CLICK = 919192
 
-    private var topView: View? = null
-    private var toolbar: Toolbar? = null
-    private var textTitle: TextView? = null
+    // 跟布局
+    lateinit var baseLayout: View
+    lateinit var baseRelativeLayout: RelativeLayout
+    lateinit var baseTopLinearLayout: LinearLayout
+    lateinit var baseCenterFrameLayout: FrameLayout
+    lateinit var baseBottomLinearLayout: LinearLayout
+
+    private lateinit var topView: View
+    private lateinit var toolbar: Toolbar
+    private lateinit var textTitle: TextView
     private var isShowBackView: Boolean = true
     private var isShowTopView: Boolean = true
 
@@ -56,10 +64,6 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
     val GONE = View.GONE
     val INVISIBLE = View.INVISIBLE
 
-    //添加的view
-    private var addCenterCiew: View? = null
-
-    protected val TAG = CommonUtils.getTag(this)
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -77,16 +81,20 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return View.inflate(context, R.layout.base_layout, null)
+        baseLayout = View.inflate(context, R.layout.base_layout, null)
+        baseRelativeLayout = baseLayout.findViewById(R.id.base_layout)
+        baseTopLinearLayout = baseLayout.findViewById(R.id.top_layout)
+        baseCenterFrameLayout = baseLayout.findViewById(R.id.center_layout)
+        baseBottomLinearLayout = baseLayout.findViewById(R.id.bottom_layout)
+        return baseLayout
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topView = View.inflate(context, R.layout.include_toolbar, null)
-        toolbar = topView!!.findViewById(R.id.toolbar) as Toolbar
-        textTitle = topView!!.findViewById(R.id.tv_title) as TextView
-        addCenterCiew = View.inflate(context, layoutResId(), null)
-        getBaseCenterLayout().addView(addCenterCiew)
+        toolbar = topView.findViewById(R.id.toolbar) as Toolbar
+        textTitle = topView.findViewById(R.id.tv_title) as TextView
+        getBaseCenterLayout().addView(initaddView(), 0)
         initBaseView()
         if (isShowTopView) {
             initTopTitle()
@@ -99,16 +107,16 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
     private fun initTopTitle() {
         val andBaseTopViewInfo = AndBaseTopViewInfo
         if (andBaseTopViewInfo.backgroundColor == -1) {
-            toolbar!!.setBackgroundColor(Color.RED)
+            toolbar.setBackgroundColor(Color.RED)
         } else {
-            toolbar!!.setBackgroundColor(getColor_(andBaseTopViewInfo.backgroundColor))
+            toolbar.setBackgroundColor(getColor_(andBaseTopViewInfo.backgroundColor))
         }
         if (AndBaseTopViewInfo.titleMode == AndBaseTopViewInfo.TitleMode.LEFT) {
-            toolbar!!.setTitleTextColor(andBaseTopViewInfo.titleTextColor)
+            toolbar.setTitleTextColor(andBaseTopViewInfo.titleTextColor)
             //toolbar字体大小在stytle里面调整
         } else {
-            textTitle!!.setTextColor(andBaseTopViewInfo.titleTextColor)
-            textTitle!!.textSize = (andBaseTopViewInfo.titleSize).toFloat()
+            textTitle.setTextColor(andBaseTopViewInfo.titleTextColor)
+            textTitle.textSize = (andBaseTopViewInfo.titleSize).toFloat()
         }
         setHasOptionsMenu(true)
         val appCompatActivity: AppCompatActivity = activity as AppCompatActivity
@@ -122,7 +130,7 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
     fun onSetUserVisibleHint(isVisibleToUser: Boolean) {
     }
 
-    protected abstract fun layoutResId(): Int
+    protected abstract fun initaddView(): View
 
     protected abstract fun initBaseView()
 
@@ -224,13 +232,6 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
     }
 
     /**
-     * 获取添加的中间的view
-     */
-    fun getAddCenterView(): View {
-        return addCenterCiew!!
-    }
-
-    /**
      * 隐藏顶部返回键
      */
     fun isShowBackView(isShowBackView: Boolean) {
@@ -242,9 +243,9 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
      */
     fun setPageTitle(title: String) {
         if (AndBaseTopViewInfo.titleMode == AndBaseTopViewInfo.TitleMode.LEFT) {
-            toolbar!!.title = title
+            toolbar.title = title
         } else {
-            textTitle!!.text = title
+            textTitle.text = title
         }
     }
 
@@ -252,8 +253,8 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
      * 设置标题栏背景色
      */
     fun setToolBarBg(backgroundColor: Int) {
-        if (isShowTopView && toolbar != null) {
-            toolbar!!.setBackgroundColor(getColor_(backgroundColor))
+        if (isShowTopView) {
+            toolbar.setBackgroundColor(getColor_(backgroundColor))
         }
     }
 
@@ -261,9 +262,9 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
      * 设置标题颜色
      */
     fun setToolBarTitleColor(titleTextColor: Int) {
-        if (isShowTopView && toolbar != null) {
-            toolbar!!.setTitleTextColor(getColor_(titleTextColor))
-            textTitle!!.setTextColor(getColor_(titleTextColor))
+        if (isShowTopView) {
+            toolbar.setTitleTextColor(getColor_(titleTextColor))
+            textTitle.setTextColor(getColor_(titleTextColor))
         }
     }
 
@@ -271,7 +272,7 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
      * 设置返回按钮
      */
     fun setBackLeftDrawable(backLeftDrawable: Int) {
-        if (isShowTopView && toolbar != null) {
+        if (isShowTopView) {
             val appCompatActivity: AppCompatActivity = activity as AppCompatActivity
             appCompatActivity.supportActionBar!!.setHomeAsUpIndicator(backLeftDrawable)
         }
@@ -282,15 +283,15 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
      */
     fun removeAllBaseTopLayout() {
         isShowTopView = false
-        top_layout.removeAllViews()
+        getBaseTopLayout().removeAllViews()
     }
 
     /**
      * 移除顶部布局
      */
     fun removeBaseTopLayout(position: Int) {
-        if (position < top_layout.childCount) {
-            top_layout.removeViewAt(position)
+        if (position < getBaseTopLayout().childCount) {
+            getBaseTopLayout().removeViewAt(position)
         }
     }
 
@@ -298,21 +299,21 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
      * 获取顶部布局
      */
     fun getBaseTopLayout(): LinearLayout {
-        return top_layout
+        return baseTopLinearLayout
     }
 
     /**
      * 获取中间布局
      */
     fun getBaseCenterLayout(): FrameLayout {
-        return center_layout
+        return baseCenterFrameLayout
     }
 
     /**
      * 获取底部布局
      */
     fun getBaseBottomLayout(): LinearLayout {
-        return bottom_layout
+        return baseBottomLinearLayout
     }
 
     /**
@@ -327,13 +328,6 @@ abstract class BaseTopViewFragment : RxFragment(), View.OnClickListener {
      */
     fun toast(text: CharSequence) {
         HHTipUtils.getInstance().showToast(context, text.toString())
-    }
-
-    /**
-     * log 输出
-     */
-    fun log(msg: String, vararg tags: String) {
-        CommonUtils.log(msg, TAG)
     }
 
     /**

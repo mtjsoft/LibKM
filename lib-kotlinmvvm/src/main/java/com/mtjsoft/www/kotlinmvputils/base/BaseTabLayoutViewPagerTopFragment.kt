@@ -1,5 +1,6 @@
 package com.mtjsoft.www.kotlinmvputils.base
 
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -20,9 +21,7 @@ abstract class BaseTabLayoutViewPagerTopFragment
 
     private var choosePosition = 0
 
-    override fun layoutResId(): Int {
-        return R.layout.base_viewpager_tablayout_top
-    }
+    override fun initaddView(): View = inflateView(R.layout.base_viewpager_tablayout_top)
 
     override fun initBaseView() {
         initView()

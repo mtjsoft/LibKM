@@ -2,15 +2,16 @@ package com.suntront.module_login.login
 
 import android.Manifest
 import android.os.Message
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ImmersionBar
 import com.mtjsoft.www.kotlinmvputils.base.BaseActivity
 import com.mtjsoft.www.kotlinmvputils.imp.PermissionsResultListener
+import com.suntront.module_login.BR
 import com.suntront.module_login.R
-import kotlinx.android.synthetic.main.activity_login.*
+import com.suntront.module_login.databinding.ActivityLoginBinding
 
 /**
  * 登录页
@@ -20,38 +21,14 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 
 @Route(path = "/login/loginActivity")
-class LoginActivity : BaseActivity<LoginViewModel>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
-    override fun layoutResId(): Int {
-        return R.layout.activity_login
-    }
+    override fun layoutResId(): Int = R.layout.activity_login
 
     override fun initView() {
         // 沉浸式状态栏
         ImmersionBar.with(this).init()
         removeAllBaseTopLayout()
-        login_name_edittext.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                viewModel.setName(s.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
-        login_password_edittext.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                viewModel.setPsw(s.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
     }
 
     override fun initData() {
@@ -75,6 +52,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 override fun onPermissionDenied() {
                 }
             })
+        viewModel.nameSingleLiveEvent.value = "测试"
     }
 
     override fun onClick(p0: View) {
@@ -87,9 +65,9 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         }
     }
 
-    override fun providerVMClass(): Class<LoginViewModel>? {
-        return LoginViewModel::class.java
-    }
+    override fun initVariableId(): Int = BR.viewModel
+
+    override fun providerVMClass(): Class<LoginViewModel> = LoginViewModel::class.java
 
     override fun processHandlerMsg(msg: Message) {
     }
