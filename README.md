@@ -175,7 +175,7 @@ class MyApp : BaseApplication() {
 
 ### 6.1、关联ViewModel
 
-已 app 中的 TestDataActivity 、TestDataViewModel 、activity_main.xml为例
+以 app 中的 TestDataActivity 、TestDataViewModel 、activity_main.xml为例
 
 在activity_main.xml中关联TestDataViewModel。
 
