@@ -1,7 +1,7 @@
 # lib-kotlinmvvm
 
 ## 1、介绍
-kotlin-mvvm 组件化快速开发框架 [去除 DataBinding 版本](https://gitee.com/mtj_java/LibKM/)
+kotlin-mvvm 组件化快速开发框架 [去除 DataBinding 版本](https://github.com/mtjsoft/LibKM/)
 
 ## 2、软件架构
 
