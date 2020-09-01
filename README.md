@@ -28,7 +28,7 @@ dependencies {
 
 ```
 
-[配套使用的AS代码生成插件](https://gitee.com/mtj_java/kotlinmvpcode)，自行下载安装不同的版本。可直接生成模板代码。
+ **_强烈推荐 [配套使用的AS代码生成插件](https://gitee.com/mtj_java/kotlinmvpcode)，可直接生成各个base基类的继承模板代码（下载不同分支中的 ***.jar 文件，直接拖拽到AS中即可，安装成功后，可以在AS的顶部Code菜单下面看到）。_** 
 
 ## 4、配置使用说明
 
@@ -128,6 +128,18 @@ android {
 反射是一种解决组件初始化的方法。
 框架中定义了IComponentApplication类，包含一个 init 初始化方法。
 
+```
+/**
+ * 利用反射初始化 Module Application
+ *
+ * 不能混淆
+ */
+interface IComponentApplication {
+    fun init(application: Application)
+}
+```
+### 5.1、初始化实现
+在各自的组件中创建一个初始化类，实现 IComponentApplication 接口。
 
 ```
 /**
@@ -135,15 +147,134 @@ android {
  */
 class ModuleApp : IComponentApplication {
 
-    companion object {
-    }
-
     override fun init(application: Application) {
         // 在这里初始化自身的库
     }
 }
 ```
+在宿主的Application中调用初始化方法。继承BaseApplication，已实现modulesApplicationInit反射初始化方法
 
+```
+class MyApp : BaseApplication() {
 
+    // 需要初始化的组件 ModuleApp 路径
+    private val modulesList = arrayListOf(
+        "com.suntront.module_login.ModuleApp"
+    )
+    
+    override fun onCreate() {
+        super.onCreate()
+        // 反射初始化
+        modulesApplicationInit(modulesList)
+    }
+}
+```
  _注意：组件中初始化的Module类不能被混淆_ 
 
+## 6、Base基类快速上手使用
+
+### 6.1、关联ViewModel
+
+已 app 中的 TestDataActivity 、TestDataViewModel 、activity_main.xml为例
+
+在activity_main.xml中关联TestDataViewModel。
+
+variable - type：ViewModel类的全路径
+variable - name：变量名
+
+```
+<layout>
+    <data>
+        <variable
+            type="cn.mtjsoft.libkotlinmvvm.test.TestDataViewModel"
+            name="testViewModel"
+        />
+    </data>
+    .....
+
+</layout>
+```
+### 6.2、继承 BaseActivity
+
+TestDataActivity 继承 BaseActivity
+
+```
+class TestDataActivity : BaseActivity<ActivityMainBinding, TestDataViewModel>() {
+    
+    // 6.1中配置 variable - name：变量名后，由系统生成的ViewModel的id（使用BR.xxx）。
+    override fun initVariableId(): Int = BR.testViewModel
+    
+    // 传入布局id
+    override fun layoutResId(): Int = R.layout.activity_main
+    
+    // 实例化 ViewModel
+    override fun providerVMClass(): Class<TestDataViewModel> = TestDataViewModel::class.java
+
+    override fun initView() {
+        // 隐藏toolbar返回按钮
+        isShowBackView(false)
+        setPageTitle("我是标题")
+    }
+
+    override fun initData() {
+    }
+
+    override fun onClick(p0: View) {
+        super.onClick(p0)
+    }
+
+    override fun processHandlerMsg(msg: Message) {
+    }
+
+}
+```
+经过6.1的xml修改保存后databinding会自动生成一个ActivityMainBinding类。（如果没有生成，试着点击Build->Clean Project）。
+
+BaseActivity是一个抽象类，有两个泛型参数，一个是ViewDataBinding，另一个是BaseViewModel，上面的 ActivityMainBinding 则是继承的ViewDataBinding作为第一个泛型约束，TestDataViewModel继承BaseViewModel作为第二个泛型约束。
+
+### 6.3、继承 BaseViewModel
+
+TestDataViewModel 继承 BaseViewModel
+```
+class TestDataViewModel : BaseViewModel() {
+
+    val liveData = MutableLiveData<String>()
+}
+```
+BaseViewModel与BaseActivity通过LiveData来处理常用UI逻辑。在这个TestDataViewModel 中就可以尽情的写你的逻辑了！
+BaseViewModel已经内置了 showLoadingUI、showToastUI、startActivity、onBackPressed等UI方法。
+
+### 6.4、数据绑定
+
+databinding框架自带的双向绑定，也有扩展
+
+如在TestDataViewModel 中定义的 liveData
+
+```
+val liveData = MutableLiveData<String>()
+```
+在 activity_main.xml的 EditText标签中用 ‘@={}’ 进行双向绑定，当输入的内容改变时，对于的liveData会随之改变。
+
+TextView中用 ‘@{}’单项绑定显示的内容也会随之变化。
+
+```
+<TextView
+            android:id="@+id/show_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="显示输入的文字"
+            android:padding="10dp"
+            android:text="@{testViewModel.liveData}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@={testViewModel.liveData}" />
+```
+
+至此，一个完成的使用流程基本完成了。其余的 BaseDataActivity 、BaseFragment等等基类的使用方法都是类似的。
+
+ **_强烈推荐 [配套使用的AS代码生成插件](https://gitee.com/mtj_java/kotlinmvpcode)，可直接生成各个base基类的继承模板代码（下载不同分支中的 ***.jar 文件，直接拖拽到AS中即可，安装成功后，可以在AS的顶部Code菜单下面看到）。_** 
+
+OK，先介绍到这儿，更多使用细节，以后再慢慢补充！
