@@ -32,12 +32,24 @@
             android:text="@={testViewModel.liveData}" />
 
         <Button
+            android:id="@+id/btu_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:onClick="onClick"
             android:text="登录模块"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btu_recycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="列表"
             android:textColor="@color/black"
             android:textSize="20sp" />
 

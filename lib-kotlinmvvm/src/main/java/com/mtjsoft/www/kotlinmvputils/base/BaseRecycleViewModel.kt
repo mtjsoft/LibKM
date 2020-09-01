@@ -1,22 +1,16 @@
 package com.mtjsoft.www.kotlinmvputils.base
 
-import androidx.recyclerview.widget.*
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.mtjsoft.www.kotlinmvputils.event.SingleLiveEvent
 import com.mtjsoft.www.kotlinmvputils.imp.AndCallBackListImp
 import com.mtjsoft.www.kotlinmvputils.imp.ItemTouchCallback
 import com.mtjsoft.www.kotlinmvputils.imp.ItemTouchHelpAdapter
-import com.mtjsoft.www.kotlinmvputils.manager.AndLoadViewManager
 import com.mtjsoft.www.kotlinmvputils.model.LoadState
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import java.util.*
 import kotlin.collections.ArrayList
 
 abstract class BaseRecycleViewModel<T> : BaseViewModel(), ItemTouchHelpAdapter {
-
-    lateinit var swipeRefreshLayout: SmartRefreshLayout
-    lateinit var recyclerView: RecyclerView
 
     // 适配器
     val adapter: SingleLiveEvent<BaseQuickAdapter<T, BaseViewHolder>> = SingleLiveEvent()
@@ -33,15 +27,6 @@ abstract class BaseRecycleViewModel<T> : BaseViewModel(), ItemTouchHelpAdapter {
 
     // 选择的布局类型
     val mark: SingleLiveEvent<LayoutManager> = SingleLiveEvent()
-
-    // 线性布局
-    val linearLayoutManager: SingleLiveEvent<LinearLayoutManager> = SingleLiveEvent()
-
-    // 网格布局
-    val gridLayoutManager: SingleLiveEvent<GridLayoutManager> = SingleLiveEvent()
-
-    // 流式布局
-    val staggeredGridLayoutManager: SingleLiveEvent<StaggeredGridLayoutManager> = SingleLiveEvent()
 
     // 分页加载时，页码
     val pager: SingleLiveEvent<Int> = SingleLiveEvent()
@@ -76,11 +61,10 @@ abstract class BaseRecycleViewModel<T> : BaseViewModel(), ItemTouchHelpAdapter {
     // 拖拽排序、滑动删除 监听
     val itemTouchCallback = ItemTouchCallback()
 
-    val loadViewManager: SingleLiveEvent<AndLoadViewManager> = SingleLiveEvent()
-
     val loadState: SingleLiveEvent<LoadState> = SingleLiveEvent()
 
-    fun setDefData() {
+    // 初始化默认参数
+    init {
         count.value = 2
         mark.value = LayoutManager.LinearLayoutManager
         pager.value = 1

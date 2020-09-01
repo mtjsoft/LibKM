@@ -5,6 +5,7 @@ import android.view.View
 import cn.mtjsoft.libkotlinmvvm.BR
 import cn.mtjsoft.libkotlinmvvm.R
 import cn.mtjsoft.libkotlinmvvm.databinding.ActivityMainBinding
+import cn.mtjsoft.libkotlinmvvm.list.ListTestRecycleViewActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mtjsoft.www.kotlinmvputils.base.BaseActivity
 
@@ -32,7 +33,15 @@ class TestDataActivity : BaseActivity<ActivityMainBinding, TestDataViewModel>() 
 
     override fun onClick(p0: View) {
         super.onClick(p0)
-        ARouter.getInstance().build("/login/loginActivity").navigation()
+        when (p0.id) {
+            R.id.btu_login -> {
+                ARouter.getInstance().build("/login/loginActivity").navigation()
+            }
+            R.id.btu_recycle -> {
+                startActivity(ListTestRecycleViewActivity::class.java)
+            }
+        }
+
     }
 
     override fun processHandlerMsg(msg: Message) {

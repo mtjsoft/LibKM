@@ -17,17 +17,15 @@ import com.mtjsoft.www.kotlinmvputils.imp.LoadViewImp
 import com.mtjsoft.www.kotlinmvputils.manager.AndLoadViewManager
 import com.mtjsoft.www.kotlinmvputils.model.LoadState
 import com.mtjsoft.www.kotlinmvputils.utils.AndDensityUtils
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.hh_activity_recycleview.*
 
 abstract class BaseRecycleviewFragment<T, VM : BaseRecycleViewModel<T>> : BaseTopViewFragment(),
     AdapterItemClickListener, LoadViewImp {
 
     lateinit var viewModel: VM
+    lateinit var loadViewManager: AndLoadViewManager
 
-    override fun layoutResId(): Int {
-        return R.layout.hh_activity_recycleview
-    }
+    override fun initaddView(): View = inflateView(R.layout.hh_activity_recycleview)
 
     override fun initBaseView() {
         initVM()
@@ -38,11 +36,12 @@ abstract class BaseRecycleviewFragment<T, VM : BaseRecycleViewModel<T>> : BaseTo
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack()
         //加载状态
-        viewModel.loadViewManager.value = AndLoadViewManager(this, getBaseCenterLayout(), this)
+        loadViewManager = AndLoadViewManager(this, getBaseCenterLayout(), this)
         changeLoadState(LoadState.LOADING)
-        viewModel.setDefData()
-        viewModel.swipeRefreshLayout = swipe_refresh
-        viewModel.recyclerView = recycler
+        // adapter
+        val adapter = instanceAdapter(viewModel.list.value!!)
+        recycler.adapter = adapter
+        viewModel.adapter.value = adapter
         loadActivityInfo()
         initValues()
         initListeners()
@@ -60,13 +59,13 @@ abstract class BaseRecycleviewFragment<T, VM : BaseRecycleViewModel<T>> : BaseTo
      * 初始化VM
      */
     private fun initVM() {
-        providerVMClass()?.let {
+        providerVMClass().let {
             viewModel = ViewModelProvider(this)[it]
         }
     }
 
 
-    protected abstract fun providerVMClass(): Class<VM>?
+    protected abstract fun providerVMClass(): Class<VM>
 
     /**
      * 加载Activity的数据之前，主要用于设置Activity的一些信息。如：标题是否显示、是否需要下拉功能等
@@ -115,16 +114,21 @@ abstract class BaseRecycleviewFragment<T, VM : BaseRecycleViewModel<T>> : BaseTo
         }
         viewModel.mark.value = setLayoutManagerType()
         viewModel.pager_size.value = setPageSize()
-        viewModel.linearLayoutManager.value = LinearLayoutManager(context)
-        viewModel.gridLayoutManager.value = GridLayoutManager(context, setCount())
-        viewModel.staggeredGridLayoutManager.value = StaggeredGridLayoutManager(
-            setCount(),
-            StaggeredGridLayoutManager.VERTICAL
-        )
+        when (setLayoutManagerType()) {
+            BaseRecycleViewModel.LayoutManager.LinearLayoutManager -> recycler.layoutManager =
+                LinearLayoutManager(context)
+            BaseRecycleViewModel.LayoutManager.GridLayoutManager -> recycler.layoutManager =
+                GridLayoutManager(context, setCount())
+            BaseRecycleViewModel.LayoutManager.StaggeredGridLayoutManager -> recycler.layoutManager =
+                StaggeredGridLayoutManager(
+                    setCount(),
+                    StaggeredGridLayoutManager.VERTICAL
+                )
+        }
         if (setItemDecoration() > 0) {
             val itemPad = AndDensityUtils.dip2px(context, setItemDecoration())
             // 设置间隔
-            viewModel.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            recycler.addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(
                     outRect: Rect,
                     view: View,
@@ -189,7 +193,7 @@ abstract class BaseRecycleviewFragment<T, VM : BaseRecycleViewModel<T>> : BaseTo
                 }
             })
         }
-        viewModel.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 when (newState) {
@@ -223,107 +227,67 @@ abstract class BaseRecycleviewFragment<T, VM : BaseRecycleViewModel<T>> : BaseTo
         // TODO Auto-generated method stub
         if (viewModel.refresh.value!!) {
             //启用下拉刷新
-            viewModel.swipeRefreshLayout.setEnableRefresh(true)
-            viewModel.swipeRefreshLayout.setOnRefreshListener {
+            swipe_refresh.setEnableRefresh(true)
+            swipe_refresh.setOnRefreshListener {
                 viewModel.isSwipeRefresh.value = true
                 viewModel.pager.value = 1
                 viewModel.getListData()
             }
         } else {
-            viewModel.swipeRefreshLayout.setEnableRefresh(false)
+            swipe_refresh.setEnableRefresh(false)
         }
         if (viewModel.load_more.value!!) {
             //启用上拉加载更多
-            viewModel.swipeRefreshLayout.setEnableLoadMore(true)
+            swipe_refresh.setEnableLoadMore(true)
             //设置是否在没有更多数据之后 Footer 跟随内容
-            viewModel.swipeRefreshLayout.setEnableFooterFollowWhenNoMoreData(false)
-            viewModel.swipeRefreshLayout.setOnLoadMoreListener {
+            swipe_refresh.setEnableFooterFollowWhenNoMoreData(false)
+            swipe_refresh.setOnLoadMoreListener {
                 if (viewModel.adapter.value != null && viewModel.temp.value != null) {
                     if (viewModel.pager_size.value!! <= viewModel.temp.value!!.size) {
                         viewModel.isLoadMoreing.value = true
                         viewModel.pager.value = viewModel.pager.value!! + 1
                         viewModel.getListData()
                     } else {
-                        viewModel.swipeRefreshLayout.finishLoadMore()
+                        swipe_refresh.finishLoadMore()
                         toast("抱歉，暂无更多数据")
                     }
                 }
             }
         } else {
             //不启用上拉加载更多
-            viewModel.swipeRefreshLayout.setEnableLoadMore(false)
+            swipe_refresh.setEnableLoadMore(false)
         }
         // 监听适配器
         val helper = ItemTouchHelper(viewModel.itemTouchCallback)
-        helper.attachToRecyclerView(viewModel.recyclerView)
+        helper.attachToRecyclerView(recycler)
         // 监听获取数据的变化
         viewModel.temp.observe(this, Observer {
             if (viewModel.isSwipeRefresh.value!!) {
-                viewModel.swipeRefreshLayout.finishRefresh()
+                swipe_refresh.finishRefresh()
+                viewModel.isSwipeRefresh.value = false
             }
             if (viewModel.isLoadMoreing.value!!) {
-                viewModel.swipeRefreshLayout.finishLoadMore()
+                swipe_refresh.finishLoadMore()
+                viewModel.isLoadMoreing.value = false
             }
             if (viewModel.temp.value == null) {
-                viewModel.isLoadMoreing.value = false
-                viewModel.isSwipeRefresh.value = false
                 return@Observer
             }
             if (viewModel.temp.value!!.size == 0) {
-                if (viewModel.pager.value!! > 1) {
-                    toast(getString(R.string.hh_no_data_more))
-                    return@Observer
-                }
-                changeLoadState(LoadState.NODATA)
-                if (viewModel.adapter.value != null) {
+                if (viewModel.pager.value!! == 1) {
+                    changeLoadState(LoadState.NODATA)
                     viewModel.adapter.value!!.notifyDataSetChanged()
                 } else {
-                    when (viewModel.mark.value) {
-                        BaseRecycleViewModel.LayoutManager.LinearLayoutManager -> viewModel.recyclerView.layoutManager =
-                            viewModel.linearLayoutManager.value
-                        BaseRecycleViewModel.LayoutManager.GridLayoutManager -> viewModel.recyclerView.layoutManager =
-                            viewModel.gridLayoutManager.value
-                        BaseRecycleViewModel.LayoutManager.StaggeredGridLayoutManager -> viewModel.recyclerView.layoutManager =
-                            viewModel.staggeredGridLayoutManager.value
-                        else -> {
-                        }
-                    }
-                    val adapter = instanceAdapter(viewModel.list.value!!)
-                    viewModel.adapter.value = adapter
-                    viewModel.recyclerView.adapter = adapter
-                    viewModel.adapter.postValue(adapter)
+                    toast(getString(R.string.hh_no_data_more))
                 }
             } else {
-                if (viewModel.pager.value!! == 1) {
-                    changeLoadState(LoadState.SUCCESS)
-                    if (viewModel.isSwipeRefresh.value!! && viewModel.adapter.value != null) {
-                        viewModel.adapter.value!!.notifyDataSetChanged()
-                        return@Observer
-                    }
-                    when (viewModel.mark.value) {
-                        BaseRecycleViewModel.LayoutManager.LinearLayoutManager -> viewModel.recyclerView.layoutManager =
-                            viewModel.linearLayoutManager.value
-                        BaseRecycleViewModel.LayoutManager.GridLayoutManager -> viewModel.recyclerView.layoutManager =
-                            viewModel.gridLayoutManager.value
-                        BaseRecycleViewModel.LayoutManager.StaggeredGridLayoutManager -> viewModel.recyclerView.layoutManager =
-                            viewModel.staggeredGridLayoutManager.value
-                        else -> {
-                        }
-                    }
-                    val adapter = instanceAdapter(viewModel.list.value!!)
-                    viewModel.adapter.value = adapter
-                    viewModel.recyclerView.adapter = adapter
-                    viewModel.adapter.postValue(adapter)
-                } else {
-                    viewModel.adapter.value!!.notifyDataSetChanged()
-                }
+                changeLoadState(LoadState.SUCCESS)
+                viewModel.adapter.value!!.notifyDataSetChanged()
             }
-            viewModel.isLoadMoreing.value = false
-            viewModel.isSwipeRefresh.value = false
         })
         // 界面状态
         viewModel.loadState.observe(this, Observer {
-            viewModel.loadViewManager.value!!.changeLoadState(it)
+            loadViewManager.changeLoadState(it)
         })
     }
 
@@ -493,7 +457,7 @@ abstract class BaseRecycleviewFragment<T, VM : BaseRecycleViewModel<T>> : BaseTo
      * @return
      */
     fun getRecyclerView(): RecyclerView {
-        return viewModel.recyclerView
+        return recycler
     }
 
     /**
